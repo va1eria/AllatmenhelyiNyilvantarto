@@ -16,5 +16,17 @@ namespace AllatmenhelyiNyilvantarto
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            KutyaFrm frm = new KutyaFrm();
+            frm.ShowDialog();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            MacskaFrm frm = new MacskaFrm();
+            frm.ShowDialog();
+        }
     }
 }

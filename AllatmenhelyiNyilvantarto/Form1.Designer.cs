@@ -108,6 +108,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(160, 28);
             this.comboBox1.TabIndex = 9;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -162,6 +163,7 @@
             this.btn_AllatModosit.TabIndex = 3;
             this.btn_AllatModosit.Text = "Állat módosítása";
             this.btn_AllatModosit.UseVisualStyleBackColor = true;
+            this.btn_AllatModosit.Click += new System.EventHandler(this.btn_AllatModosit_Click);
             // 
             // btn_UjAllat
             // 
@@ -171,6 +173,7 @@
             this.btn_UjAllat.TabIndex = 2;
             this.btn_UjAllat.Text = "Új állat";
             this.btn_UjAllat.UseVisualStyleBackColor = true;
+            this.btn_UjAllat.Click += new System.EventHandler(this.btn_UjAllat_Click);
             // 
             // listBox_Gazdasok
             // 
@@ -237,6 +240,7 @@
             this.btn_UjGondozo.TabIndex = 17;
             this.btn_UjGondozo.Text = "Új gondozó";
             this.btn_UjGondozo.UseVisualStyleBackColor = true;
+            this.btn_UjGondozo.Click += new System.EventHandler(this.btn_UjGondozo_Click);
             // 
             // btn_OrokbeTorol
             // 
@@ -264,6 +268,7 @@
             this.btn_UjOrokbe.TabIndex = 14;
             this.btn_UjOrokbe.Text = "Új örökbefogadó";
             this.btn_UjOrokbe.UseVisualStyleBackColor = true;
+            this.btn_UjOrokbe.Click += new System.EventHandler(this.btn_UjOrokbe_Click);
             // 
             // label3
             // 

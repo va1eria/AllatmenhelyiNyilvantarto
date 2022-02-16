@@ -53,7 +53,7 @@
             this.checkBox_gyerekkel_tarthato = new System.Windows.Forms.CheckBox();
             this.btn_OrokbefModosit = new System.Windows.Forms.Button();
             this.btn_Orokbefogadas = new System.Windows.Forms.Button();
-            this.checkBox_Orokbefogadva = new System.Windows.Forms.CheckBox();
+            this.checkBox_orokbefogadva = new System.Windows.Forms.CheckBox();
             this.comboBox_Gondozo = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -335,19 +335,20 @@
             this.btn_Orokbefogadas.TabIndex = 103;
             this.btn_Orokbefogadas.Text = "Örökbefogadás";
             this.btn_Orokbefogadas.UseVisualStyleBackColor = true;
+            this.btn_Orokbefogadas.Click += new System.EventHandler(this.btn_Orokbefogadas_Click);
             // 
-            // checkBox_Orokbefogadva
+            // checkBox_orokbefogadva
             // 
-            this.checkBox_Orokbefogadva.AutoSize = true;
-            this.checkBox_Orokbefogadva.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBox_Orokbefogadva.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Orokbefogadva.Location = new System.Drawing.Point(516, 296);
-            this.checkBox_Orokbefogadva.Margin = new System.Windows.Forms.Padding(2);
-            this.checkBox_Orokbefogadva.Name = "checkBox_Orokbefogadva";
-            this.checkBox_Orokbefogadva.Size = new System.Drawing.Size(201, 24);
-            this.checkBox_Orokbefogadva.TabIndex = 102;
-            this.checkBox_Orokbefogadva.Text = "Örökbefogadónál       ";
-            this.checkBox_Orokbefogadva.UseVisualStyleBackColor = true;
+            this.checkBox_orokbefogadva.AutoSize = true;
+            this.checkBox_orokbefogadva.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkBox_orokbefogadva.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_orokbefogadva.Location = new System.Drawing.Point(516, 296);
+            this.checkBox_orokbefogadva.Margin = new System.Windows.Forms.Padding(2);
+            this.checkBox_orokbefogadva.Name = "checkBox_orokbefogadva";
+            this.checkBox_orokbefogadva.Size = new System.Drawing.Size(201, 24);
+            this.checkBox_orokbefogadva.TabIndex = 102;
+            this.checkBox_orokbefogadva.Text = "Örökbefogadónál       ";
+            this.checkBox_orokbefogadva.UseVisualStyleBackColor = true;
             // 
             // comboBox_Gondozo
             // 
@@ -382,6 +383,7 @@
             this.button2.TabIndex = 108;
             this.button2.Text = "OK";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // MacskaFrm
             // 
@@ -393,7 +395,7 @@
             this.Controls.Add(this.comboBox_Gondozo);
             this.Controls.Add(this.btn_OrokbefModosit);
             this.Controls.Add(this.btn_Orokbefogadas);
-            this.Controls.Add(this.checkBox_Orokbefogadva);
+            this.Controls.Add(this.checkBox_orokbefogadva);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dateTimePicker_Bekerulesi);
@@ -451,7 +453,7 @@
         private System.Windows.Forms.CheckBox checkBox_gyerekkel_tarthato;
         private System.Windows.Forms.Button btn_OrokbefModosit;
         private System.Windows.Forms.Button btn_Orokbefogadas;
-        private System.Windows.Forms.CheckBox checkBox_Orokbefogadva;
+        private System.Windows.Forms.CheckBox checkBox_orokbefogadva;
         private System.Windows.Forms.ComboBox comboBox_Gondozo;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;

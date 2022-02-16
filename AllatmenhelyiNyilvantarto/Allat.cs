@@ -8,14 +8,14 @@ namespace AllatmenhelyiNyilvantarto
 {
     enum Szor
     {
-        rovid,
-        kozepes,
-        hosszu
+        rövid,
+        közepes,
+        hosszú
     }
     enum Nem
     {
-        him,
-        nosteny
+        hím,
+        nőstény
     }
     abstract class Allat
     {
@@ -82,7 +82,7 @@ namespace AllatmenhelyiNyilvantarto
             {
                 if (value <= DateTime.Now)
                 {
-                    bekerulesiDatum = value;
+                    szuletesiDatum = value;
                 }
                 else
                 {
