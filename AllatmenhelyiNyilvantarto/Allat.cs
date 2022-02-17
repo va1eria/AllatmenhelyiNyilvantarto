@@ -47,7 +47,11 @@ namespace AllatmenhelyiNyilvantarto
             get => chipszam;
             set
             {
-                if (value.Length <= 16)
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    chipszam = "még nincs chip";
+                }
+                else if (!string.IsNullOrWhiteSpace(value) || value.Length <= 16)
                 {
                     chipszam = value;
                 }

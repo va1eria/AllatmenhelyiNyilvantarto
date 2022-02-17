@@ -136,6 +136,7 @@
             this.btn_Kilepes.TabIndex = 6;
             this.btn_Kilepes.Text = "Kilépés";
             this.btn_Kilepes.UseVisualStyleBackColor = true;
+            this.btn_Kilepes.Click += new System.EventHandler(this.btn_Kilepes_Click);
             // 
             // btn_OrokbefogadasAdatai
             // 
@@ -145,6 +146,7 @@
             this.btn_OrokbefogadasAdatai.TabIndex = 5;
             this.btn_OrokbefogadasAdatai.Text = "Örökbefogadás adatai";
             this.btn_OrokbefogadasAdatai.UseVisualStyleBackColor = true;
+            this.btn_OrokbefogadasAdatai.Click += new System.EventHandler(this.btn_OrokbefogadasAdatai_Click);
             // 
             // btn_AllatTorles
             // 

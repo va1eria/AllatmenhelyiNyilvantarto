@@ -21,6 +21,7 @@ namespace AllatmenhelyiNyilvantarto
             comboBox_Nem.DataSource = Enum.GetValues(typeof(Nem));
             comboBox_Szor.DataSource = Enum.GetValues(typeof(Szor));
             comboBox_Gondozo.DataSource = AdatbazisKezelo.GondozokFelolvasas();
+            checkBox_orokbefogadva.Enabled = false;
         }
 
         internal KutyaFrm(Kutya modosit) : this()
@@ -46,7 +47,6 @@ namespace AllatmenhelyiNyilvantarto
             checkBox_lakasban.Checked = kutya.LakasbanTarthato;
             checkBox_egyedul.Checked = kutya.EgyedulHagyhato;
             checkBox_orokbefogadva.Checked = kutya.Gazdas;
-            AdatbazisKezelo.AllatModositas(kutya);
         }
 
         private void button_OK_Click(object sender, EventArgs e)
@@ -77,26 +77,24 @@ namespace AllatmenhelyiNyilvantarto
                         );
                     AdatbazisKezelo.AllatFelvitel(gondozo, kutya);
                 }
-                //else
-                //{
-                //    kutya.Chipszam = textBox_Chip.Text;
-                //    allat.Leiras = richTextBox1.Text;
-                //    allat.Szor = (Szor)comboBox_Szor.SelectedItem;
-                //    allat.Suly = (double)numericUpDown1.Value;
-                //    allat.Ivartalanitott = checkBox_ivartalan.Checked;
-                //    allat.MacskavalTarthato = checkBox_macskaval_tarthato.Checked;
-                //    allat.KutyavalTarthato = checkBox_kutyaval_tarthato.Checked;
-                //    allat.GyerekkelTarthato = checkBox_gyerekkel_tarthato.Checked;
-                //    allat.Gazdas = checkBox_orokbefogadva.Checked;
-                //    allat.Gondozo = gondozo;
-                //    if (allat is Kutya kutya)
-                //    {
-                //        kutya.Szobatiszta = checkBox_szobatiszta.Checked;
-                //        kutya.LakasbanTarthato = checkBox_lakasban.Checked;
-                //        kutya.EgyedulHagyhato = checkBox_egyedul.Checked;
-                //    }
-                //    AdatbazisKezelo.AllatModositas(allat);
-                //}
+                else
+                {
+                    kutya.Chipszam = textBox_Chip.Text;
+                    kutya.Leiras = richTextBox1.Text;
+                    kutya.Szor = (Szor)comboBox_Szor.SelectedItem;
+                    kutya.Suly = (double)numericUpDown1.Value;
+                    kutya.Ivartalanitott = checkBox_ivartalan.Checked;
+                    kutya.MacskavalTarthato = checkBox_macskaval_tarthato.Checked;
+                    kutya.KutyavalTarthato = checkBox_kutyaval_tarthato.Checked;
+                    kutya.GyerekkelTarthato = checkBox_gyerekkel_tarthato.Checked;
+                    kutya.Gazdas = checkBox_orokbefogadva.Checked;
+                    kutya.Gondozo = gondozo;
+                    kutya.Szobatiszta = checkBox_szobatiszta.Checked;
+                    kutya.LakasbanTarthato = checkBox_lakasban.Checked;
+                    kutya.EgyedulHagyhato = checkBox_egyedul.Checked;
+
+                    AdatbazisKezelo.AllatModositas(kutya);
+                }
             }
             catch (ABKivetel ex)
             {
@@ -107,6 +105,16 @@ namespace AllatmenhelyiNyilvantarto
             {
                 MessageBox.Show(ex.Message, "Figyelem!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 DialogResult = DialogResult.None;
+            }
+        }
+
+        private void btn_Orokbef_Click(object sender, EventArgs e)
+        {
+            OrokbefogadasFrm frm = new OrokbefogadasFrm(kutya);
+            if(frm.ShowDialog() == DialogResult.OK)
+            {
+                checkBox_orokbefogadva.Checked = true;
+                checkBox_orokbefogadva.Visible = true;
             }
         }
     }

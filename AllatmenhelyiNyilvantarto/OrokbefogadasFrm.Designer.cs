@@ -71,6 +71,7 @@
             this.dateTimePicker_Orokbefogadas.Name = "dateTimePicker_Orokbefogadas";
             this.dateTimePicker_Orokbefogadas.Size = new System.Drawing.Size(193, 26);
             this.dateTimePicker_Orokbefogadas.TabIndex = 20;
+            this.dateTimePicker_Orokbefogadas.ValueChanged += new System.EventHandler(this.dateTimePicker_Orokbefogadas_ValueChanged);
             // 
             // label1
             // 
@@ -85,10 +86,11 @@
             // 
             // comboBox_Orokbefogado
             // 
+            this.comboBox_Orokbefogado.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox_Orokbefogado.FormattingEnabled = true;
             this.comboBox_Orokbefogado.Location = new System.Drawing.Point(213, 56);
             this.comboBox_Orokbefogado.Name = "comboBox_Orokbefogado";
-            this.comboBox_Orokbefogado.Size = new System.Drawing.Size(193, 21);
+            this.comboBox_Orokbefogado.Size = new System.Drawing.Size(193, 28);
             this.comboBox_Orokbefogado.TabIndex = 21;
             // 
             // label3
@@ -129,10 +131,11 @@
             // comboBox_Allat
             // 
             this.comboBox_Allat.Enabled = false;
+            this.comboBox_Allat.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox_Allat.FormattingEnabled = true;
             this.comboBox_Allat.Location = new System.Drawing.Point(213, 20);
             this.comboBox_Allat.Name = "comboBox_Allat";
-            this.comboBox_Allat.Size = new System.Drawing.Size(193, 21);
+            this.comboBox_Allat.Size = new System.Drawing.Size(193, 28);
             this.comboBox_Allat.TabIndex = 94;
             // 
             // button1

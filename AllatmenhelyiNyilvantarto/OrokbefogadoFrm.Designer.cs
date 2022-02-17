@@ -44,7 +44,7 @@
             // 
             this.txb_lakcim.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txb_lakcim.Location = new System.Drawing.Point(199, 65);
-            this.txb_lakcim.Margin = new System.Windows.Forms.Padding(2);
+            this.txb_lakcim.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txb_lakcim.Name = "txb_lakcim";
             this.txb_lakcim.Size = new System.Drawing.Size(193, 26);
             this.txb_lakcim.TabIndex = 13;
@@ -65,7 +65,7 @@
             this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.Location = new System.Drawing.Point(247, 200);
-            this.button2.Margin = new System.Windows.Forms.Padding(2);
+            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(145, 30);
             this.button2.TabIndex = 18;
@@ -77,7 +77,7 @@
             this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(87, 200);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(145, 30);
             this.button1.TabIndex = 16;
@@ -89,7 +89,7 @@
             // 
             this.txb_email.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txb_email.Location = new System.Drawing.Point(199, 148);
-            this.txb_email.Margin = new System.Windows.Forms.Padding(2);
+            this.txb_email.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txb_email.Name = "txb_email";
             this.txb_email.Size = new System.Drawing.Size(193, 26);
             this.txb_email.TabIndex = 15;
@@ -99,7 +99,7 @@
             this.dateTimePicker1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePicker1.Location = new System.Drawing.Point(199, 105);
-            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(2);
+            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(193, 26);
             this.dateTimePicker1.TabIndex = 14;
@@ -108,7 +108,7 @@
             // 
             this.txb_nev.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txb_nev.Location = new System.Drawing.Point(199, 26);
-            this.txb_nev.Margin = new System.Windows.Forms.Padding(2);
+            this.txb_nev.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txb_nev.Name = "txb_nev";
             this.txb_nev.Size = new System.Drawing.Size(193, 26);
             this.txb_nev.TabIndex = 12;
@@ -161,7 +161,9 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "OrokbefogadoFrm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Örökbefogadó";
             this.ResumeLayout(false);
             this.PerformLayout();

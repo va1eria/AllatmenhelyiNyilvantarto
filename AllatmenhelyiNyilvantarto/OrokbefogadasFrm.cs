@@ -15,7 +15,7 @@ namespace AllatmenhelyiNyilvantarto
         Allat allat;
         //Orokbefogado orokbefogado;
 
-        internal OrokbefogadasFrm(Allat allat, Orokbefogado orokbefogado)
+        internal OrokbefogadasFrm(Allat allat/*, Orokbefogado orokbefogado*/)
         {
             InitializeComponent();
             if (allat is Kutya kutya)
@@ -26,6 +26,9 @@ namespace AllatmenhelyiNyilvantarto
             {
                 this.allat = macska;
             }
+            dateTimePicker_Orokbefogadas.Value = DateTime.Now;
+            dateTimePicker_Utoell.Value = dateTimePicker_Orokbefogadas.Value.AddMonths(1);
+            dateTimePicker_Utoell.Enabled = false;
             comboBox_Allat.DataSource = AdatbazisKezelo.AllatokFelolvasas();
             comboBox_Orokbefogado.DataSource = AdatbazisKezelo.OrokbefogadokFelolvasas();
         }
@@ -47,6 +50,11 @@ namespace AllatmenhelyiNyilvantarto
                 MessageBox.Show(ex.Message, "Figyelem!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 DialogResult = DialogResult.None;
             }
+        }
+
+        private void dateTimePicker_Orokbefogadas_ValueChanged(object sender, EventArgs e)
+        {
+            dateTimePicker_Utoell.Value = dateTimePicker_Orokbefogadas.Value.AddMonths(1);
         }
     }
 }

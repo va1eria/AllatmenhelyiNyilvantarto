@@ -16,6 +16,7 @@ namespace AllatmenhelyiNyilvantarto
         Gondozo gondozo;
         List<Kutya> kutyak = new List<Kutya>();
         List<Macska> macskak = new List<Macska>();
+        List<Allat> gazdasok = new List<Allat>();
         public Form1()
         {
             InitializeComponent();
@@ -47,6 +48,7 @@ namespace AllatmenhelyiNyilvantarto
             AllatFrm frm = new AllatFrm();
             if (frm.ShowDialog() == DialogResult.OK)
             {
+                comboBox1_SelectedIndexChanged(sender, e);
                 LBFrissit();
             }
         }
@@ -78,7 +80,7 @@ namespace AllatmenhelyiNyilvantarto
                     macskak.Add(macska);
                 }
             }
-            
+
             switch (comboBox1.SelectedItem.ToString())
             {
                 case "Összes":
@@ -88,7 +90,7 @@ namespace AllatmenhelyiNyilvantarto
                     listBox_Allatok.DataSource = kutyak;
                     break;
                 case "Macska":
-                    listBox_Allatok.DataSource= macskak;
+                    listBox_Allatok.DataSource = macskak;
                     break;
             }
         }
@@ -122,6 +124,27 @@ namespace AllatmenhelyiNyilvantarto
                         LBFrissit();
                     }
                 }
+            }
+        }
+
+        private void btn_Kilepes_Click(object sender, EventArgs e)
+        {
+
+            if (MessageBox.Show("Biztosan kilép a programból?", "Figyelem!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+
+
+
+        }
+
+        private void btn_OrokbefogadasAdatai_Click(object sender, EventArgs e)
+        {
+            if (listBox_Allatok.SelectedItem != null)
+            {
+                OrokbefogadasFrm frm = new OrokbefogadasFrm((Allat)listBox_Allatok.SelectedItem);
+                frm.ShowDialog();
             }
         }
     }

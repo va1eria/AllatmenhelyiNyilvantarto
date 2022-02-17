@@ -14,7 +14,6 @@ namespace AllatmenhelyiNyilvantarto
     {
         Gondozo gondozo;
         Macska macska;
-        Orokbefogado orokbefogado;
 
         internal MacskaFrm()
         {
@@ -22,6 +21,7 @@ namespace AllatmenhelyiNyilvantarto
             comboBox_Nem.DataSource = Enum.GetValues(typeof(Nem));
             comboBox_Szor.DataSource = Enum.GetValues(typeof(Szor));
             comboBox_Gondozo.DataSource = AdatbazisKezelo.GondozokFelolvasas();
+            checkBox_orokbefogadva.Enabled = false;
         }
 
         internal MacskaFrm(Macska modosit) : this()
@@ -45,7 +45,6 @@ namespace AllatmenhelyiNyilvantarto
             checkBox_gyerekkel_tarthato.Checked = macska.GyerekkelTarthato;
             checkBox_kijaros.Checked = macska.Kijaros;
             checkBox_orokbefogadva.Checked = macska.Gazdas;
-            AdatbazisKezelo.AllatModositas(macska);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -74,24 +73,22 @@ namespace AllatmenhelyiNyilvantarto
                         );
                     AdatbazisKezelo.AllatFelvitel(gondozo, macska);
                 }
-                //else
-                //{
-                //    allat.Chipszam = textBox_Chip.Text;
-                //    allat.Leiras = richTextBox1.Text;
-                //    allat.Szor = (Szor)comboBox_Szor.SelectedItem;
-                //    allat.Suly = (double)numericUpDown1.Value;
-                //    allat.Ivartalanitott = checkBox_ivartalan.Checked;
-                //    allat.MacskavalTarthato = checkBox_macskaval_tarthato.Checked;
-                //    allat.KutyavalTarthato = checkBox_kutyaval_tarthato.Checked;
-                //    allat.GyerekkelTarthato = checkBox_gyerekkel_tarthato.Checked;
-                //    allat.Gazdas = checkBox_orokbefogadva.Checked;
-                //    allat.Gondozo = gondozo;
-                //    if (allat is Macska macska)
-                //    {
-                //        macska.Kijaros = checkBox_kijaros.Checked;
-                //    }
-                //    AdatbazisKezelo.AllatModositas(allat);
-                //}
+                else
+                {
+                    macska.Chipszam = textBox_Chip.Text;
+                    macska.Leiras = richTextBox1.Text;
+                    macska.Szor = (Szor)comboBox_Szor.SelectedItem;
+                    macska.Suly = (double)numericUpDown1.Value;
+                    macska.Ivartalanitott = checkBox_ivartalan.Checked;
+                    macska.MacskavalTarthato = checkBox_macskaval_tarthato.Checked;
+                    macska.KutyavalTarthato = checkBox_kutyaval_tarthato.Checked;
+                    macska.GyerekkelTarthato = checkBox_gyerekkel_tarthato.Checked;
+                    macska.Gazdas = checkBox_orokbefogadva.Checked;
+                    macska.Gondozo = gondozo;
+                    macska.Kijaros = checkBox_kijaros.Checked;
+
+                    AdatbazisKezelo.AllatModositas(macska);
+                }
             }
             catch (ABKivetel ex)
             {
@@ -107,8 +104,12 @@ namespace AllatmenhelyiNyilvantarto
 
         private void btn_Orokbefogadas_Click(object sender, EventArgs e)
         {
-            OrokbefogadasFrm frm = new OrokbefogadasFrm(macska, orokbefogado);
-            frm.ShowDialog();
+            OrokbefogadasFrm frm = new OrokbefogadasFrm(macska);
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                checkBox_orokbefogadva.Checked = true;
+                checkBox_orokbefogadva.Visible = true;
+            }
         }
     }
 }
