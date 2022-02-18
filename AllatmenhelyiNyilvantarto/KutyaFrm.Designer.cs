@@ -59,6 +59,7 @@
             this.comboBox_Gondozo = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button_OK = new System.Windows.Forms.Button();
+            this.label_Orokbefogadonal = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -340,12 +341,12 @@
             // 
             this.checkBox_orokbefogadva.AutoSize = true;
             this.checkBox_orokbefogadva.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBox_orokbefogadva.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_orokbefogadva.ForeColor = System.Drawing.Color.Red;
-            this.checkBox_orokbefogadva.Location = new System.Drawing.Point(514, 297);
+            this.checkBox_orokbefogadva.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_orokbefogadva.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.checkBox_orokbefogadva.Location = new System.Drawing.Point(545, 336);
             this.checkBox_orokbefogadva.Margin = new System.Windows.Forms.Padding(2);
             this.checkBox_orokbefogadva.Name = "checkBox_orokbefogadva";
-            this.checkBox_orokbefogadva.Size = new System.Drawing.Size(214, 28);
+            this.checkBox_orokbefogadva.Size = new System.Drawing.Size(120, 17);
             this.checkBox_orokbefogadva.TabIndex = 92;
             this.checkBox_orokbefogadva.Text = "Örökbefogadónál    ";
             this.checkBox_orokbefogadva.UseVisualStyleBackColor = true;
@@ -353,6 +354,7 @@
             // 
             // btn_Orokbef
             // 
+            this.btn_Orokbef.Enabled = false;
             this.btn_Orokbef.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Orokbef.Location = new System.Drawing.Point(514, 376);
             this.btn_Orokbef.Name = "btn_Orokbef";
@@ -364,6 +366,7 @@
             // 
             // btn_OrokbefModosit
             // 
+            this.btn_OrokbefModosit.Enabled = false;
             this.btn_OrokbefModosit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_OrokbefModosit.Location = new System.Drawing.Point(514, 428);
             this.btn_OrokbefModosit.Name = "btn_OrokbefModosit";
@@ -417,11 +420,24 @@
             this.button_OK.UseVisualStyleBackColor = true;
             this.button_OK.Click += new System.EventHandler(this.button_OK_Click);
             // 
+            // label_Orokbefogadonal
+            // 
+            this.label_Orokbefogadonal.AutoSize = true;
+            this.label_Orokbefogadonal.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_Orokbefogadonal.ForeColor = System.Drawing.Color.Red;
+            this.label_Orokbefogadonal.Location = new System.Drawing.Point(518, 288);
+            this.label_Orokbefogadonal.Name = "label_Orokbefogadonal";
+            this.label_Orokbefogadonal.Size = new System.Drawing.Size(192, 25);
+            this.label_Orokbefogadonal.TabIndex = 112;
+            this.label_Orokbefogadonal.Text = "Örökbefogadónál";
+            this.label_Orokbefogadonal.Visible = false;
+            // 
             // KutyaFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(769, 563);
+            this.Controls.Add(this.label_Orokbefogadonal);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button_OK);
             this.Controls.Add(this.comboBox_Gondozo);
@@ -491,5 +507,6 @@
         private System.Windows.Forms.ComboBox comboBox_Gondozo;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button_OK;
+        private System.Windows.Forms.Label label_Orokbefogadonal;
     }
 }

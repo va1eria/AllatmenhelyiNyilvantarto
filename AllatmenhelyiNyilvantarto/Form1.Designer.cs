@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
@@ -62,6 +63,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -156,6 +158,7 @@
             this.btn_AllatTorles.TabIndex = 4;
             this.btn_AllatTorles.Text = "Állat törlése";
             this.btn_AllatTorles.UseVisualStyleBackColor = true;
+            this.btn_AllatTorles.Click += new System.EventHandler(this.btn_AllatTorles_Click);
             // 
             // btn_AllatModosit
             // 
@@ -185,6 +188,7 @@
             this.listBox_Gazdasok.Name = "listBox_Gazdasok";
             this.listBox_Gazdasok.Size = new System.Drawing.Size(366, 144);
             this.listBox_Gazdasok.TabIndex = 1;
+            this.listBox_Gazdasok.SelectedIndexChanged += new System.EventHandler(this.listBox_Allatok_SelectedIndexChanged);
             // 
             // listBox_Allatok
             // 
@@ -194,6 +198,7 @@
             this.listBox_Allatok.Name = "listBox_Allatok";
             this.listBox_Allatok.Size = new System.Drawing.Size(366, 144);
             this.listBox_Allatok.TabIndex = 0;
+            this.listBox_Allatok.SelectedIndexChanged += new System.EventHandler(this.listBox_Allatok_SelectedIndexChanged);
             // 
             // tabPage2
             // 
@@ -416,6 +421,11 @@
             this.label5.TabIndex = 0;
             this.label5.Text = "Örökbefogadásra váró";
             // 
+            // timer1
+            // 
+            this.timer1.Interval = 3600000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -473,6 +483,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

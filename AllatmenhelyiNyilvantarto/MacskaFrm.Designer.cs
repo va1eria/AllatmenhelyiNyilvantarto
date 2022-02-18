@@ -57,6 +57,7 @@
             this.comboBox_Gondozo = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.label_Orokbefogadonal = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -325,6 +326,7 @@
             this.btn_OrokbefModosit.TabIndex = 104;
             this.btn_OrokbefModosit.Text = "Örökbefogadás módosítása";
             this.btn_OrokbefModosit.UseVisualStyleBackColor = true;
+            this.btn_OrokbefModosit.Click += new System.EventHandler(this.btn_OrokbefModosit_Click);
             // 
             // btn_Orokbefogadas
             // 
@@ -341,15 +343,16 @@
             // 
             this.checkBox_orokbefogadva.AutoSize = true;
             this.checkBox_orokbefogadva.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBox_orokbefogadva.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_orokbefogadva.ForeColor = System.Drawing.Color.Red;
-            this.checkBox_orokbefogadva.Location = new System.Drawing.Point(516, 296);
+            this.checkBox_orokbefogadva.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_orokbefogadva.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.checkBox_orokbefogadva.Location = new System.Drawing.Point(559, 342);
             this.checkBox_orokbefogadva.Margin = new System.Windows.Forms.Padding(2);
             this.checkBox_orokbefogadva.Name = "checkBox_orokbefogadva";
-            this.checkBox_orokbefogadva.Size = new System.Drawing.Size(214, 28);
+            this.checkBox_orokbefogadva.Size = new System.Drawing.Size(120, 17);
             this.checkBox_orokbefogadva.TabIndex = 102;
             this.checkBox_orokbefogadva.Text = "Örökbefogadónál    ";
             this.checkBox_orokbefogadva.UseVisualStyleBackColor = true;
+            this.checkBox_orokbefogadva.Visible = false;
             // 
             // comboBox_Gondozo
             // 
@@ -386,11 +389,24 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // label_Orokbefogadonal
+            // 
+            this.label_Orokbefogadonal.AutoSize = true;
+            this.label_Orokbefogadonal.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_Orokbefogadonal.ForeColor = System.Drawing.Color.Red;
+            this.label_Orokbefogadonal.Location = new System.Drawing.Point(520, 290);
+            this.label_Orokbefogadonal.Name = "label_Orokbefogadonal";
+            this.label_Orokbefogadonal.Size = new System.Drawing.Size(192, 25);
+            this.label_Orokbefogadonal.TabIndex = 113;
+            this.label_Orokbefogadonal.Text = "Örökbefogadónál";
+            this.label_Orokbefogadonal.Visible = false;
+            // 
             // MacskaFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(767, 566);
+            this.Controls.Add(this.label_Orokbefogadonal);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.comboBox_Gondozo);
@@ -458,5 +474,6 @@
         private System.Windows.Forms.ComboBox comboBox_Gondozo;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label_Orokbefogadonal;
     }
 }

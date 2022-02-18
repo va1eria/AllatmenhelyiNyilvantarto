@@ -147,6 +147,41 @@ namespace AllatmenhelyiNyilvantarto
             }
         }
 
+        public static void AllatTorles(Allat torol)
+        {
+            Csatlakozas();
+            try
+            {
+                command.Transaction = connection.BeginTransaction();
+                command.CommandText = $"DELETE FROM [{((torol is Kutya) ? "Kutya" : "Macska")}] WHERE [Nev] = @nev";
+                command.Parameters.AddWithValue("@nev", torol.Nev);
+                command.ExecuteNonQuery();
+                command.CommandText = "DELETE FROM [Allat] WHERE [Nev] = @nev";
+                command.ExecuteNonQuery();
+                command.Transaction.Commit();
+            }
+            catch (Exception ex)
+            {
+                try
+                {
+                    if (command.Transaction != null)
+                    {
+                        command.Transaction.Rollback();
+                    }
+
+                }
+                catch (Exception ex2)
+                {
+                    throw new ABKivetel("Végzetes hiba az adatbázisban! Értesítse a rendszergazdát!", ex2);
+                }
+                throw new ABKivetel("Az állat törlése sikertelen!", ex);
+            }
+            finally
+            {
+                KapcsolatBontas();
+            }
+        }
+
         public static void GondozoFelvitel(Gondozo uj)
         {
             Csatlakozas();
@@ -258,6 +293,75 @@ namespace AllatmenhelyiNyilvantarto
             finally
             {
                 KapcsolatBontas();
+            }
+        }
+
+        public static void OrokbefogadasModositas(Orokbefogado orokbefogado, Allat allat, Orokbefogadas modosit)
+        {
+            Csatlakozas();
+            try
+            {
+                command.CommandText = "UPDATE [Orokbefogadas] SET [OrokbefogadasDatuma] = @orok, [UtoellenorzesDatuma] = @uto, [UtoellenorzesSikeres] = @sik, [OrokbefogadoID] = @oid WHERE [AllatID] = @nev";
+                command.Parameters.AddWithValue("@orok", modosit.OrokbefogadasDatuma);
+                command.Parameters.AddWithValue("@uto", modosit.UtoellenorzesDatuma);
+                command.Parameters.AddWithValue("@sik", modosit.SikeresUtoellenorzes);
+                command.Parameters.AddWithValue("@oid", orokbefogado.Id);
+                command.Parameters.AddWithValue("@nev", allat.Nev);
+                command.ExecuteNonQuery();
+                command.Parameters.Clear();
+            }
+            catch (Exception ex)
+            {
+                throw new ABKivetel("Az örökbefogadás módosítása sikertelen!", ex);
+            }
+            finally
+            {
+                KapcsolatBontas();
+            }
+        }
+        //TODO orokbefogadas modositas
+        public static Orokbefogadas OrokbefogadasFelolvasas(Allat allat)
+        {
+            Orokbefogadas orokbefogadas;
+            Csatlakozas();
+            try
+            {
+                //command.CommandText = "SELECT * FROM [Orokbefogadas] WHERE [AllatID] = @nev";
+                //command.Parameters.AddWithValue("@nev", allat.Nev);
+                command.CommandText = "SELECT *,[AllatID] AS [Allatnev] FROM [Orokbefogadas] LEFT JOIN [Allat] ON [Orokbefogadas].[AllatID] = [Allat].[Nev]";
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    orokbefogadas = new Orokbefogadas((DateTime)reader["OrokbefogadasDatuma"], (DateTime)reader["UtoellenorzesDatuma"], (bool)reader["UtoellenorzesSikeres"]);
+                }
+                return orokbefogadas;
+            }
+            catch (Exception ex)
+            {
+                throw new ABKivetel("A lekérdezés sikertelen!", ex);
+            }
+        }
+
+        // TODO timer
+        public static DateTime UtoellenorzesKiolvasas()
+        {
+            DateTime utoellDatum;
+            Csatlakozas();
+            try
+            {
+                command.CommandText = "SELECT [UtoellenorzesDatuma],[AllatID] AS [Allatnev] FROM [Orokbefogadas] LEFT JOIN [Allat] ON [Orokbefogadas].[AllatID] = [Allat].[Nev]";
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+
+                    utoellDatum = (DateTime)reader["UtoellenorzesDatuma"];
+
+                    //reader.Close();
+                }
+                return utoellDatum;
+            }
+            catch (Exception ex)
+            {
+                throw new ABKivetel("A lekérdezés sikertelen!", ex);
             }
         }
 

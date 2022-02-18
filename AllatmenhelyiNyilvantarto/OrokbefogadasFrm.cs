@@ -14,8 +14,9 @@ namespace AllatmenhelyiNyilvantarto
     {
         Allat allat;
         //Orokbefogado orokbefogado;
+        Orokbefogadas orokbefogadas;
 
-        internal OrokbefogadasFrm(Allat allat/*, Orokbefogado orokbefogado*/)
+        internal OrokbefogadasFrm(Allat allat)
         {
             InitializeComponent();
             if (allat is Kutya kutya)
@@ -32,13 +33,34 @@ namespace AllatmenhelyiNyilvantarto
             comboBox_Allat.DataSource = AdatbazisKezelo.AllatokFelolvasas();
             comboBox_Orokbefogado.DataSource = AdatbazisKezelo.OrokbefogadokFelolvasas();
         }
+        // TODO orokbefogadas modositas
+        internal OrokbefogadasFrm(Orokbefogadas modosit, Allat allat) : this(allat)
+        {
+            orokbefogadas = modosit;
+            comboBox_Allat.SelectedItem = allat;
+            comboBox_Allat.Enabled = false;
+            dateTimePicker_Orokbefogadas.Value = orokbefogadas.OrokbefogadasDatuma;
+            dateTimePicker_Orokbefogadas.Enabled = false;
+            dateTimePicker_Utoell.Value = orokbefogadas.UtoellenorzesDatuma;
+            checkBox_Utoell.Checked = orokbefogadas.SikeresUtoellenorzes;
+        }
 
         private void btn_OK_Click(object sender, EventArgs e)
         {
             try
             {
-                Orokbefogadas orokbefogadas = new Orokbefogadas(dateTimePicker_Orokbefogadas.Value, dateTimePicker_Utoell.Value, checkBox_Utoell.Checked);
-                AdatbazisKezelo.OrokbefogadasFelvitele((Orokbefogado)comboBox_Orokbefogado.SelectedItem, allat, orokbefogadas);
+                if (orokbefogadas == null)
+                {
+                    orokbefogadas = new Orokbefogadas(dateTimePicker_Orokbefogadas.Value, dateTimePicker_Utoell.Value, checkBox_Utoell.Checked);
+                    AdatbazisKezelo.OrokbefogadasFelvitele((Orokbefogado)comboBox_Orokbefogado.SelectedItem, allat, orokbefogadas); 
+                }
+                else
+                {//TODO orokbefogadas modosit
+                    orokbefogadas.OrokbefogadasDatuma = dateTimePicker_Orokbefogadas.Value;
+                    orokbefogadas.UtoellenorzesDatuma = dateTimePicker_Utoell.Value;
+                    orokbefogadas.SikeresUtoellenorzes = checkBox_Utoell.Checked;
+                    AdatbazisKezelo.OrokbefogadasModositas((Orokbefogado)comboBox_Orokbefogado.SelectedItem, allat, orokbefogadas);
+                }
             }
             catch (ABKivetel ex)
             {

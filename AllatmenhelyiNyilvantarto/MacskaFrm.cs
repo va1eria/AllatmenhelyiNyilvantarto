@@ -14,6 +14,7 @@ namespace AllatmenhelyiNyilvantarto
     {
         Gondozo gondozo;
         Macska macska;
+        Orokbefogadas orokbefogadas;
 
         internal MacskaFrm()
         {
@@ -26,6 +27,8 @@ namespace AllatmenhelyiNyilvantarto
 
         internal MacskaFrm(Macska modosit) : this()
         {
+            btn_Orokbefogadas.Enabled = true;
+            btn_OrokbefModosit.Enabled = true;
             macska = modosit;
             textBox_Nev.Text = macska.Nev;
             textBox_Nev.ReadOnly = true;
@@ -108,7 +111,19 @@ namespace AllatmenhelyiNyilvantarto
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 checkBox_orokbefogadva.Checked = true;
-                checkBox_orokbefogadva.Visible = true;
+                label_Orokbefogadonal.Visible = true;
+            }
+        }
+        //TODO orokbefogadas modositas
+        private void btn_OrokbefModosit_Click(object sender, EventArgs e)
+        {
+            if (macska.Gazdas)
+            {
+                //orokbefogadas = AdatbazisKezelo.OrokbefogadasFelolvasas(macska);
+                OrokbefogadasFrm frm = new OrokbefogadasFrm(orokbefogadas, macska);
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                } 
             }
         }
     }

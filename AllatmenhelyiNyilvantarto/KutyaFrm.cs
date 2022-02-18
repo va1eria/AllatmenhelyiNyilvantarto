@@ -21,11 +21,12 @@ namespace AllatmenhelyiNyilvantarto
             comboBox_Nem.DataSource = Enum.GetValues(typeof(Nem));
             comboBox_Szor.DataSource = Enum.GetValues(typeof(Szor));
             comboBox_Gondozo.DataSource = AdatbazisKezelo.GondozokFelolvasas();
-            checkBox_orokbefogadva.Enabled = false;
         }
 
         internal KutyaFrm(Kutya modosit) : this()
         {
+            btn_Orokbef.Enabled = true;
+            btn_OrokbefModosit.Enabled = true;
             kutya = modosit;
             textBox_Nev.Text = kutya.Nev;
             textBox_Nev.ReadOnly = true;
@@ -114,7 +115,7 @@ namespace AllatmenhelyiNyilvantarto
             if(frm.ShowDialog() == DialogResult.OK)
             {
                 checkBox_orokbefogadva.Checked = true;
-                checkBox_orokbefogadva.Visible = true;
+                label_Orokbefogadonal.Visible = true;
             }
         }
     }
