@@ -343,25 +343,52 @@ namespace AllatmenhelyiNyilvantarto
         }
 
         // TODO timer
-        public static DateTime UtoellenorzesKiolvasas()
+        //public static DateTime UtoellenorzesKiolvasas()
+        //{
+        //    DateTime utoellDatum;
+        //    Csatlakozas();
+        //    try
+        //    {
+        //        command.CommandText = "SELECT [UtoellenorzesDatuma],[AllatID] AS [Allatnev] FROM [Orokbefogadas] LEFT JOIN [Allat] ON [Orokbefogadas].[AllatID] = [Allat].[Nev]";
+        //        using (SqlDataReader reader = command.ExecuteReader())
+        //        {
+
+        //            utoellDatum = (DateTime)reader["UtoellenorzesDatuma"];
+
+        //            //reader.Close();
+        //        }
+        //        return utoellDatum;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new ABKivetel("A lekérdezés sikertelen!", ex);
+        //    }
+        //}
+
+        public static List<string> UtoellenorzesEsedekes() 
         {
-            DateTime utoellDatum;
+            List<string> utoellEsedekes = new List<string>();
             Csatlakozas();
             try
             {
-                command.CommandText = "SELECT [UtoellenorzesDatuma],[AllatID] AS [Allatnev] FROM [Orokbefogadas] LEFT JOIN [Allat] ON [Orokbefogadas].[AllatID] = [Allat].[Nev]";
+                command.CommandText = "SELECT [UtoellenorzesDatuma],[AllatID] FROM [Orokbefogadas] LEFT JOIN [Allat] ON [Orokbefogadas].[AllatID] = [Allat].[Nev] WHERE [UtoellenorzesDatuma] < (GETDATE() +3)";
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
-
-                    utoellDatum = (DateTime)reader["UtoellenorzesDatuma"];
-
-                    //reader.Close();
+                    while (reader.Read())
+                    {
+                        utoellEsedekes.Add(reader["AllatID"].ToString());
+                    }
+                    reader.Close();
                 }
-                return utoellDatum;
+                return utoellEsedekes;
             }
             catch (Exception ex)
             {
                 throw new ABKivetel("A lekérdezés sikertelen!", ex);
+            }
+            finally 
+            { 
+                KapcsolatBontas();
             }
         }
 

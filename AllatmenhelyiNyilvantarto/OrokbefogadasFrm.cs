@@ -54,13 +54,13 @@ namespace AllatmenhelyiNyilvantarto
                     orokbefogadas = new Orokbefogadas(dateTimePicker_Orokbefogadas.Value, dateTimePicker_Utoell.Value, checkBox_Utoell.Checked);
                     AdatbazisKezelo.OrokbefogadasFelvitele((Orokbefogado)comboBox_Orokbefogado.SelectedItem, allat, orokbefogadas); 
                 }
-                else
-                {//TODO orokbefogadas modosit
-                    orokbefogadas.OrokbefogadasDatuma = dateTimePicker_Orokbefogadas.Value;
-                    orokbefogadas.UtoellenorzesDatuma = dateTimePicker_Utoell.Value;
-                    orokbefogadas.SikeresUtoellenorzes = checkBox_Utoell.Checked;
-                    AdatbazisKezelo.OrokbefogadasModositas((Orokbefogado)comboBox_Orokbefogado.SelectedItem, allat, orokbefogadas);
-                }
+                //else
+                //{//TODO orokbefogadas modosit
+                //    orokbefogadas.OrokbefogadasDatuma = dateTimePicker_Orokbefogadas.Value;
+                //    orokbefogadas.UtoellenorzesDatuma = dateTimePicker_Utoell.Value;
+                //    orokbefogadas.SikeresUtoellenorzes = checkBox_Utoell.Checked;
+                //    AdatbazisKezelo.OrokbefogadasModositas((Orokbefogado)comboBox_Orokbefogado.SelectedItem, allat, orokbefogadas);
+                //}
             }
             catch (ABKivetel ex)
             {

@@ -21,6 +21,7 @@ namespace AllatmenhelyiNyilvantarto
         List<Macska> macskak = new List<Macska>();
         List<Allat> gazdasok;
         List<Allat> nemGazdasok;
+        List<Allat> utoellenorzesreVarok = new List<Allat>();
 
         public Form1()
         {
@@ -63,7 +64,7 @@ namespace AllatmenhelyiNyilvantarto
             gazdasok = new List<Allat>();
             nemGazdasok = new List<Allat>();
             List<Allat> allatok = AdatbazisKezelo.AllatokFelolvasas();
-            
+
             if (allatok.Count != 0)
             {
                 foreach (Allat allat in allatok.ToList())
@@ -239,9 +240,58 @@ namespace AllatmenhelyiNyilvantarto
             }
         }
 
+        public void Utoellenorzes()
+        {
+            List<string> utoellenorzesreVaroNevek = AdatbazisKezelo.UtoellenorzesEsedekes();
+            foreach (Allat allat in gazdasok)
+            {
+                for (int i = 0; i < utoellenorzesreVaroNevek.Count; i++)
+                {
+                    if (allat.Nev == utoellenorzesreVaroNevek[i])
+                    {
+                        utoellenorzesreVarok.Add(allat);
+                    }
+                }
+            }
+            
+        }
+
         private void timer1_Tick(object sender, EventArgs e)
         {
+            Utoellenorzes();
             //TODO
+            //List<string> utoellenorzesreVaroNevek = AdatbazisKezelo.UtoellenorzesEsedekes();
+            //foreach (Allat allat in gazdasok)
+            //{
+            //    for (int i = 0; i < utoellenorzesreVaroNevek.Count; i++)
+            //    {
+            //        if (allat.Nev == utoellenorzesreVaroNevek[i])
+            //        {
+            //            utoellenorzesreVarok.Add(allat);
+            //        }
+            //    }
+            //}
+            
+        }
+
+        private void listBox_Gazdasok_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            e.DrawBackground();
+            Brush myBrush = Brushes.Black;
+
+            for (int i = 0; i < listBox_Gazdasok.Items.Count; i++)
+            {
+                if (utoellenorzesreVarok.Contains(listBox_Gazdasok.Items[e.Index] as Allat))
+                {
+                    myBrush = Brushes.Red;
+                    e.Graphics.DrawString(listBox_Gazdasok.Items[e.Index].ToString(),e.Font, myBrush, e.Bounds, StringFormat.GenericDefault);
+                }
+                else
+                {
+                    e.Graphics.DrawString(listBox_Gazdasok.Items[e.Index].ToString(),e.Font, myBrush, e.Bounds, StringFormat.GenericDefault);
+
+                }
+            }
         }
     }
 }

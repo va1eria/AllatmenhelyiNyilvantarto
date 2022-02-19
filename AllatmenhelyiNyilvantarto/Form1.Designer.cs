@@ -182,12 +182,14 @@
             // 
             // listBox_Gazdasok
             // 
+            this.listBox_Gazdasok.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox_Gazdasok.FormattingEnabled = true;
             this.listBox_Gazdasok.ItemHeight = 20;
             this.listBox_Gazdasok.Location = new System.Drawing.Point(22, 250);
             this.listBox_Gazdasok.Name = "listBox_Gazdasok";
             this.listBox_Gazdasok.Size = new System.Drawing.Size(366, 144);
             this.listBox_Gazdasok.TabIndex = 1;
+            this.listBox_Gazdasok.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox_Gazdasok_DrawItem);
             this.listBox_Gazdasok.SelectedIndexChanged += new System.EventHandler(this.listBox_Allatok_SelectedIndexChanged);
             // 
             // listBox_Allatok
@@ -423,7 +425,7 @@
             // 
             // timer1
             // 
-            this.timer1.Interval = 3600000;
+            this.timer1.Interval = 60000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Form1
