@@ -107,6 +107,12 @@
       <DependentUpon>MacskaFrm.cs</DependentUpon>
     </Compile>
     <Compile Include="Orokbefogadas.cs" />
+    <Compile Include="OrokbefogadasAdataiFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OrokbefogadasAdataiFrm.Designer.cs">
+      <DependentUpon>OrokbefogadasAdataiFrm.cs</DependentUpon>
+    </Compile>
     <Compile Include="OrokbefogadasFrm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -137,6 +143,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MacskaFrm.resx">
       <DependentUpon>MacskaFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OrokbefogadasAdataiFrm.resx">
+      <DependentUpon>OrokbefogadasAdataiFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="OrokbefogadasFrm.resx">
       <DependentUpon>OrokbefogadasFrm.cs</DependentUpon>

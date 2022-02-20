@@ -21,6 +21,8 @@ namespace AllatmenhelyiNyilvantarto
         List<Macska> macskak;
         List<Allat> gazdasok;
         List<Allat> nemGazdasok;
+        List<Kutya> gazdasKutyak;
+        List<Macska> gazdasMacskak;
         List<Allat> utoellenorzesreVarok = new List<Allat>();
         List<Allat> utoellenorzesSikeres = new List<Allat>();
 
@@ -84,11 +86,14 @@ namespace AllatmenhelyiNyilvantarto
 
         void LBFrissit()
         {
+            
             listBox_Gondozok.DataSource = null;
             listBox_Gondozok.DataSource = AdatbazisKezelo.GondozokFelolvasas();
             listBox_Orokbefogadok.DataSource = null;
             listBox_Orokbefogadok.DataSource = AdatbazisKezelo.OrokbefogadokFelolvasas();
             GazdasLista();
+            NemGazdasKutyakMacskak();
+            GazdasKutyakMacskak();
             listBox_Allatok.DataSource = null;
             listBox_Allatok.DataSource = nemGazdasok;
             listBox_Gazdasok.DataSource = null;
@@ -96,6 +101,14 @@ namespace AllatmenhelyiNyilvantarto
             Utoellenorzes();
             listBox_Allatok.SelectedItem = null;
             listBox_Gazdasok.SelectedItem = null;
+            richTextBox_Kutyak.Text = kutyak.Count.ToString();
+            richTextBox_Kutyak.SelectionAlignment = HorizontalAlignment.Center;
+            richTextBox_Macskak.Text = macskak.Count.ToString();
+            richTextBox_Macskak.SelectionAlignment = HorizontalAlignment.Center;
+            richTextBox_GazdasKutyak.Text = gazdasKutyak.Count.ToString();
+            richTextBox_GazdasKutyak.SelectionAlignment = HorizontalAlignment.Center;
+            richTextBox_GazdasMacskak.Text= gazdasMacskak.Count.ToString();
+            richTextBox_GazdasMacskak.SelectionAlignment = HorizontalAlignment.Center;
         }
 
         private void btn_UjAllat_Click(object sender, EventArgs e)
@@ -117,11 +130,9 @@ namespace AllatmenhelyiNyilvantarto
             }
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        void NemGazdasKutyakMacskak()
         {
             listBox_Allatok.DataSource = null;
-            //kutyak.Clear();
-            //macskak.Clear();
             kutyak = new List<Kutya>();
             macskak = new List<Macska>();
             foreach (Allat allat in nemGazdasok)
@@ -135,7 +146,28 @@ namespace AllatmenhelyiNyilvantarto
                     macskak.Add(macska);
                 }
             }
+        }
 
+        void GazdasKutyakMacskak()
+        {
+            gazdasKutyak = new List<Kutya>();
+            gazdasMacskak = new List<Macska>();
+            foreach (Allat allat in gazdasok)
+            {
+                if (allat is Kutya kutya && kutya.Gazdas == true)
+                {
+                    gazdasKutyak.Add(kutya);
+                }
+                else if (allat is Macska macska && macska.Gazdas == true)
+                {
+                    gazdasMacskak.Add(macska);
+                }
+            }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            NemGazdasKutyakMacskak();
             switch (comboBox1.SelectedItem.ToString())
             {
                 case "Összes":
@@ -194,9 +226,11 @@ namespace AllatmenhelyiNyilvantarto
         }
 
         private void btn_OrokbefogadasAdatai_Click(object sender, EventArgs e)
-        {// TODO 
+        {
             if (listBox_Gazdasok.SelectedItem != null)
             {
+                OrokbefogadasAdataiFrm frm = new OrokbefogadasAdataiFrm((Allat)listBox_Gazdasok.SelectedItem);
+                frm.ShowDialog();
             }
         }
 

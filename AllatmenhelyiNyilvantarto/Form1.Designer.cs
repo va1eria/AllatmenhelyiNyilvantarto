@@ -53,10 +53,10 @@
             this.listBox_Gondozok = new System.Windows.Forms.ListBox();
             this.listBox_Orokbefogadok = new System.Windows.Forms.ListBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.richTextBox4 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox3 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.richTextBox_Macskak = new System.Windows.Forms.RichTextBox();
+            this.richTextBox_GazdasKutyak = new System.Windows.Forms.RichTextBox();
+            this.richTextBox_GazdasMacskak = new System.Windows.Forms.RichTextBox();
+            this.richTextBox_Kutyak = new System.Windows.Forms.RichTextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -317,10 +317,10 @@
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.richTextBox4);
-            this.tabPage3.Controls.Add(this.richTextBox3);
-            this.tabPage3.Controls.Add(this.richTextBox2);
-            this.tabPage3.Controls.Add(this.richTextBox1);
+            this.tabPage3.Controls.Add(this.richTextBox_Macskak);
+            this.tabPage3.Controls.Add(this.richTextBox_GazdasKutyak);
+            this.tabPage3.Controls.Add(this.richTextBox_GazdasMacskak);
+            this.tabPage3.Controls.Add(this.richTextBox_Kutyak);
             this.tabPage3.Controls.Add(this.label10);
             this.tabPage3.Controls.Add(this.label9);
             this.tabPage3.Controls.Add(this.label8);
@@ -335,37 +335,49 @@
             this.tabPage3.Text = "            Statisztika            ";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // richTextBox4
+            // richTextBox_Macskak
             // 
-            this.richTextBox4.Location = new System.Drawing.Point(437, 94);
-            this.richTextBox4.Name = "richTextBox4";
-            this.richTextBox4.Size = new System.Drawing.Size(100, 96);
-            this.richTextBox4.TabIndex = 9;
-            this.richTextBox4.Text = "";
+            this.richTextBox_Macskak.Enabled = false;
+            this.richTextBox_Macskak.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBox_Macskak.ForeColor = System.Drawing.Color.OrangeRed;
+            this.richTextBox_Macskak.Location = new System.Drawing.Point(437, 94);
+            this.richTextBox_Macskak.Name = "richTextBox_Macskak";
+            this.richTextBox_Macskak.Size = new System.Drawing.Size(100, 96);
+            this.richTextBox_Macskak.TabIndex = 9;
+            this.richTextBox_Macskak.Text = "";
             // 
-            // richTextBox3
+            // richTextBox_GazdasKutyak
             // 
-            this.richTextBox3.Location = new System.Drawing.Point(105, 272);
-            this.richTextBox3.Name = "richTextBox3";
-            this.richTextBox3.Size = new System.Drawing.Size(100, 96);
-            this.richTextBox3.TabIndex = 8;
-            this.richTextBox3.Text = "";
+            this.richTextBox_GazdasKutyak.Enabled = false;
+            this.richTextBox_GazdasKutyak.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBox_GazdasKutyak.ForeColor = System.Drawing.Color.Green;
+            this.richTextBox_GazdasKutyak.Location = new System.Drawing.Point(105, 272);
+            this.richTextBox_GazdasKutyak.Name = "richTextBox_GazdasKutyak";
+            this.richTextBox_GazdasKutyak.Size = new System.Drawing.Size(100, 96);
+            this.richTextBox_GazdasKutyak.TabIndex = 8;
+            this.richTextBox_GazdasKutyak.Text = "";
             // 
-            // richTextBox2
+            // richTextBox_GazdasMacskak
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(437, 272);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(100, 96);
-            this.richTextBox2.TabIndex = 7;
-            this.richTextBox2.Text = "";
+            this.richTextBox_GazdasMacskak.Enabled = false;
+            this.richTextBox_GazdasMacskak.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBox_GazdasMacskak.ForeColor = System.Drawing.Color.Green;
+            this.richTextBox_GazdasMacskak.Location = new System.Drawing.Point(437, 272);
+            this.richTextBox_GazdasMacskak.Name = "richTextBox_GazdasMacskak";
+            this.richTextBox_GazdasMacskak.Size = new System.Drawing.Size(100, 96);
+            this.richTextBox_GazdasMacskak.TabIndex = 7;
+            this.richTextBox_GazdasMacskak.Text = "";
             // 
-            // richTextBox1
+            // richTextBox_Kutyak
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(105, 94);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(100, 96);
-            this.richTextBox1.TabIndex = 6;
-            this.richTextBox1.Text = "";
+            this.richTextBox_Kutyak.Enabled = false;
+            this.richTextBox_Kutyak.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBox_Kutyak.ForeColor = System.Drawing.Color.OrangeRed;
+            this.richTextBox_Kutyak.Location = new System.Drawing.Point(105, 94);
+            this.richTextBox_Kutyak.Name = "richTextBox_Kutyak";
+            this.richTextBox_Kutyak.Size = new System.Drawing.Size(100, 96);
+            this.richTextBox_Kutyak.TabIndex = 6;
+            this.richTextBox_Kutyak.Text = "";
             // 
             // label10
             // 
@@ -476,10 +488,10 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ListBox listBox_Gondozok;
         private System.Windows.Forms.ListBox listBox_Orokbefogadok;
-        private System.Windows.Forms.RichTextBox richTextBox4;
-        private System.Windows.Forms.RichTextBox richTextBox3;
-        private System.Windows.Forms.RichTextBox richTextBox2;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox richTextBox_Macskak;
+        private System.Windows.Forms.RichTextBox richTextBox_GazdasKutyak;
+        private System.Windows.Forms.RichTextBox richTextBox_GazdasMacskak;
+        private System.Windows.Forms.RichTextBox richTextBox_Kutyak;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
