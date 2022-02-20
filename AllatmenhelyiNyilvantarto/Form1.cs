@@ -197,9 +197,6 @@ namespace AllatmenhelyiNyilvantarto
         {// TODO 
             if (listBox_Gazdasok.SelectedItem != null)
             {
-                OrokbefogadasFrm frm = new OrokbefogadasFrm((Allat)listBox_Gazdasok.SelectedItem);
-                frm.ShowDialog();
-
             }
         }
 

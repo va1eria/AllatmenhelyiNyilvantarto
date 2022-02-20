@@ -14,6 +14,7 @@ namespace AllatmenhelyiNyilvantarto
     {
         Gondozo gondozo;
         Kutya kutya;
+        Orokbefogadas orokbefogadas;
 
         internal KutyaFrm()
         {
@@ -21,6 +22,7 @@ namespace AllatmenhelyiNyilvantarto
             comboBox_Nem.DataSource = Enum.GetValues(typeof(Nem));
             comboBox_Szor.DataSource = Enum.GetValues(typeof(Szor));
             comboBox_Gondozo.DataSource = AdatbazisKezelo.GondozokFelolvasas();
+            //checkBox_orokbefogadva.Enabled = false;
         }
 
         internal KutyaFrm(Kutya modosit) : this()
@@ -48,6 +50,11 @@ namespace AllatmenhelyiNyilvantarto
             checkBox_lakasban.Checked = kutya.LakasbanTarthato;
             checkBox_egyedul.Checked = kutya.EgyedulHagyhato;
             checkBox_orokbefogadva.Checked = kutya.Gazdas;
+            if (kutya.Gazdas)
+            {
+                label_Orokbefogadonal.Visible = true;
+                btn_Orokbef.Enabled = false;
+            }
         }
 
         private void button_OK_Click(object sender, EventArgs e)
@@ -116,6 +123,19 @@ namespace AllatmenhelyiNyilvantarto
             {
                 checkBox_orokbefogadva.Checked = true;
                 label_Orokbefogadonal.Visible = true;
+            }
+        }
+
+        private void btn_OrokbefModosit_Click(object sender, EventArgs e)
+        {
+            if (kutya.Gazdas)
+            {
+                orokbefogadas = AdatbazisKezelo.OrokbefogadasFelolvasas(kutya);
+                OrokbefogadasFrm frm = new OrokbefogadasFrm(orokbefogadas, kutya);
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    AdatbazisKezelo.OrokbefogadasModositas(kutya, orokbefogadas);
+                }
             }
         }
     }

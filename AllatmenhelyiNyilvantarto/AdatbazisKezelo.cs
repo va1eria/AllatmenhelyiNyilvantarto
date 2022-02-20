@@ -296,16 +296,14 @@ namespace AllatmenhelyiNyilvantarto
             }
         }
 
-        public static void OrokbefogadasModositas(Orokbefogado orokbefogado, Allat allat, Orokbefogadas modosit)
+        public static void OrokbefogadasModositas(Allat allat, Orokbefogadas modosit)
         {
             Csatlakozas();
             try
             {
-                command.CommandText = "UPDATE [Orokbefogadas] SET [OrokbefogadasDatuma] = @orok, [UtoellenorzesDatuma] = @uto, [UtoellenorzesSikeres] = @sik, [OrokbefogadoID] = @oid WHERE [AllatID] = @nev";
-                command.Parameters.AddWithValue("@orok", modosit.OrokbefogadasDatuma);
+                command.CommandText = "UPDATE [Orokbefogadas] SET [UtoellenorzesDatuma] = @uto, [UtoellenorzesSikeres] = @sik WHERE [AllatID] = @nev";
                 command.Parameters.AddWithValue("@uto", modosit.UtoellenorzesDatuma);
                 command.Parameters.AddWithValue("@sik", modosit.SikeresUtoellenorzes);
-                command.Parameters.AddWithValue("@oid", orokbefogado.Id);
                 command.Parameters.AddWithValue("@nev", allat.Nev);
                 command.ExecuteNonQuery();
                 command.Parameters.Clear();
@@ -319,15 +317,12 @@ namespace AllatmenhelyiNyilvantarto
                 KapcsolatBontas();
             }
         }
-        //TODO orokbefogadas modositas
         public static Orokbefogadas OrokbefogadasFelolvasas(Allat allat)
         {
             Orokbefogadas orokbefogadas = null;
             Csatlakozas();
             try
             {
-                //command.CommandText = "SELECT * FROM [Orokbefogadas] WHERE [AllatID] = @nev";
-                //command.Parameters.AddWithValue("@nev", allat.Nev);
                 command.CommandText = "SELECT *,[AllatID] AS [Allatnev] FROM [Orokbefogadas] LEFT JOIN [Allat] ON [Orokbefogadas].[AllatID] = @nev";
                 command.Parameters.AddWithValue("@nev", allat.Nev);
 

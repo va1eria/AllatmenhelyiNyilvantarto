@@ -36,9 +36,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.checkBox_Utoell = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.comboBox_Allat = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.btn_OK = new System.Windows.Forms.Button();
+            this.txb_allat = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // dateTimePicker_Utoell
@@ -128,16 +128,6 @@
             this.label4.TabIndex = 93;
             this.label4.Text = "Állat";
             // 
-            // comboBox_Allat
-            // 
-            this.comboBox_Allat.Enabled = false;
-            this.comboBox_Allat.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox_Allat.FormattingEnabled = true;
-            this.comboBox_Allat.Location = new System.Drawing.Point(213, 20);
-            this.comboBox_Allat.Name = "comboBox_Allat";
-            this.comboBox_Allat.Size = new System.Drawing.Size(193, 28);
-            this.comboBox_Allat.TabIndex = 94;
-            // 
             // button1
             // 
             this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
@@ -163,14 +153,22 @@
             this.btn_OK.UseVisualStyleBackColor = true;
             this.btn_OK.Click += new System.EventHandler(this.btn_OK_Click);
             // 
+            // txb_allat
+            // 
+            this.txb_allat.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txb_allat.Location = new System.Drawing.Point(213, 18);
+            this.txb_allat.Name = "txb_allat";
+            this.txb_allat.Size = new System.Drawing.Size(193, 26);
+            this.txb_allat.TabIndex = 112;
+            // 
             // OrokbefogadasFrm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(432, 289);
+            this.Controls.Add(this.txb_allat);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btn_OK);
-            this.Controls.Add(this.comboBox_Allat);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.checkBox_Utoell);
             this.Controls.Add(this.label3);
@@ -198,8 +196,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckBox checkBox_Utoell;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox comboBox_Allat;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btn_OK;
+        private System.Windows.Forms.TextBox txb_allat;
     }
 }

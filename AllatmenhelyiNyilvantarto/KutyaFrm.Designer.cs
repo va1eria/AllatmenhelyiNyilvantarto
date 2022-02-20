@@ -374,6 +374,7 @@
             this.btn_OrokbefModosit.TabIndex = 96;
             this.btn_OrokbefModosit.Text = "Örökbefogadás módosítása";
             this.btn_OrokbefModosit.UseVisualStyleBackColor = true;
+            this.btn_OrokbefModosit.Click += new System.EventHandler(this.btn_OrokbefModosit_Click);
             // 
             // label1
             // 

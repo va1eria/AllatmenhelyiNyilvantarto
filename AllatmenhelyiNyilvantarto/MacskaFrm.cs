@@ -22,7 +22,7 @@ namespace AllatmenhelyiNyilvantarto
             comboBox_Nem.DataSource = Enum.GetValues(typeof(Nem));
             comboBox_Szor.DataSource = Enum.GetValues(typeof(Szor));
             comboBox_Gondozo.DataSource = AdatbazisKezelo.GondozokFelolvasas();
-            checkBox_orokbefogadva.Enabled = false;
+            //checkBox_orokbefogadva.Enabled = false;
         }
 
         internal MacskaFrm(Macska modosit) : this()
@@ -48,6 +48,11 @@ namespace AllatmenhelyiNyilvantarto
             checkBox_gyerekkel_tarthato.Checked = macska.GyerekkelTarthato;
             checkBox_kijaros.Checked = macska.Kijaros;
             checkBox_orokbefogadva.Checked = macska.Gazdas;
+            if (macska.Gazdas)
+            {
+                label_Orokbefogadonal.Visible = true;
+                btn_Orokbefogadas.Enabled = false;
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -123,6 +128,7 @@ namespace AllatmenhelyiNyilvantarto
                 OrokbefogadasFrm frm = new OrokbefogadasFrm(orokbefogadas, macska);
                 if (frm.ShowDialog() == DialogResult.OK)
                 {
+                    AdatbazisKezelo.OrokbefogadasModositas(macska, orokbefogadas);
                 } 
             }
         }

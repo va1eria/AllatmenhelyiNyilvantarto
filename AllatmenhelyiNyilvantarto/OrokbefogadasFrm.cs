@@ -27,6 +27,8 @@ namespace AllatmenhelyiNyilvantarto
             {
                 this.allat = macska;
             }
+            txb_allat.Text = allat.Nev;
+            txb_allat.Enabled = false;
             dateTimePicker_Orokbefogadas.Value = DateTime.Now;
             dateTimePicker_Utoell.Value = dateTimePicker_Orokbefogadas.Value.AddMonths(1);
             dateTimePicker_Utoell.Enabled = false;
@@ -37,11 +39,13 @@ namespace AllatmenhelyiNyilvantarto
         internal OrokbefogadasFrm(Orokbefogadas modosit, Allat allat) : this(allat)
         {
             orokbefogadas = modosit;
-            comboBox_Allat.SelectedItem = allat;
-            comboBox_Allat.Enabled = false;
+            txb_allat.Text = allat.Nev;
+            txb_allat.Enabled = false;
+            comboBox_Orokbefogado.Enabled = false;
             dateTimePicker_Orokbefogadas.Value = orokbefogadas.OrokbefogadasDatuma;
             dateTimePicker_Orokbefogadas.Enabled = false;
             dateTimePicker_Utoell.Value = orokbefogadas.UtoellenorzesDatuma;
+            dateTimePicker_Utoell.Enabled = true;
             checkBox_Utoell.Checked = orokbefogadas.SikeresUtoellenorzes;
         }
 
@@ -54,13 +58,21 @@ namespace AllatmenhelyiNyilvantarto
                     orokbefogadas = new Orokbefogadas(dateTimePicker_Orokbefogadas.Value, dateTimePicker_Utoell.Value, checkBox_Utoell.Checked);
                     AdatbazisKezelo.OrokbefogadasFelvitele((Orokbefogado)comboBox_Orokbefogado.SelectedItem, allat, orokbefogadas); 
                 }
-                //else
-                //{//TODO orokbefogadas modosit
-                //    orokbefogadas.OrokbefogadasDatuma = dateTimePicker_Orokbefogadas.Value;
-                //    orokbefogadas.UtoellenorzesDatuma = dateTimePicker_Utoell.Value;
-                //    orokbefogadas.SikeresUtoellenorzes = checkBox_Utoell.Checked;
-                //    AdatbazisKezelo.OrokbefogadasModositas((Orokbefogado)comboBox_Orokbefogado.SelectedItem, allat, orokbefogadas);
-                //}
+                else
+                {//TODO orokbefogadas modosit
+                    //orokbefogadas.OrokbefogadasDatuma = dateTimePicker_Orokbefogadas.Value;
+                    if (dateTimePicker_Utoell.Value > dateTimePicker_Orokbefogadas.Value.AddDays(7))
+                    {
+                        orokbefogadas.UtoellenorzesDatuma = dateTimePicker_Utoell.Value; 
+                    }
+                    else
+                    {
+                        MessageBox.Show("Az utóellenőrzés dátuma legalább egy héttel az örökbefogadás dátuma után kell legyen!", "Figyelem!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        DialogResult = DialogResult.None;
+                    }
+                    orokbefogadas.SikeresUtoellenorzes = checkBox_Utoell.Checked;
+                    AdatbazisKezelo.OrokbefogadasModositas(allat, orokbefogadas);
+                }
             }
             catch (ABKivetel ex)
             {
