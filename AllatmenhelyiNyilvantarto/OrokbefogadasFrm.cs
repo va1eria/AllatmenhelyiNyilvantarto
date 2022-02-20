@@ -30,7 +30,7 @@ namespace AllatmenhelyiNyilvantarto
             dateTimePicker_Orokbefogadas.Value = DateTime.Now;
             dateTimePicker_Utoell.Value = dateTimePicker_Orokbefogadas.Value.AddMonths(1);
             dateTimePicker_Utoell.Enabled = false;
-            comboBox_Allat.DataSource = AdatbazisKezelo.AllatokFelolvasas();
+            //comboBox_Allat.DataSource = AdatbazisKezelo.AllatokFelolvasas();
             comboBox_Orokbefogado.DataSource = AdatbazisKezelo.OrokbefogadokFelolvasas();
         }
         // TODO orokbefogadas modositas

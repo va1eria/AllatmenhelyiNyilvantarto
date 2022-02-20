@@ -322,17 +322,24 @@ namespace AllatmenhelyiNyilvantarto
         //TODO orokbefogadas modositas
         public static Orokbefogadas OrokbefogadasFelolvasas(Allat allat)
         {
-            Orokbefogadas orokbefogadas;
+            Orokbefogadas orokbefogadas = null;
             Csatlakozas();
             try
             {
                 //command.CommandText = "SELECT * FROM [Orokbefogadas] WHERE [AllatID] = @nev";
                 //command.Parameters.AddWithValue("@nev", allat.Nev);
-                command.CommandText = "SELECT *,[AllatID] AS [Allatnev] FROM [Orokbefogadas] LEFT JOIN [Allat] ON [Orokbefogadas].[AllatID] = [Allat].[Nev]";
+                command.CommandText = "SELECT *,[AllatID] AS [Allatnev] FROM [Orokbefogadas] LEFT JOIN [Allat] ON [Orokbefogadas].[AllatID] = @nev";
+                command.Parameters.AddWithValue("@nev", allat.Nev);
 
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
-                    orokbefogadas = new Orokbefogadas((DateTime)reader["OrokbefogadasDatuma"], (DateTime)reader["UtoellenorzesDatuma"], (bool)reader["UtoellenorzesSikeres"]);
+                    while (reader.Read())
+                    {
+                        if (!reader.IsDBNull(reader.GetOrdinal("Allatnev")))
+                        {
+                            orokbefogadas = new Orokbefogadas((DateTime)reader["OrokbefogadasDatuma"], (DateTime)reader["UtoellenorzesDatuma"], (bool)reader["UtoellenorzesSikeres"]);
+                        } 
+                    }
                 }
                 return orokbefogadas;
             }
@@ -342,36 +349,13 @@ namespace AllatmenhelyiNyilvantarto
             }
         }
 
-        // TODO timer
-        //public static DateTime UtoellenorzesKiolvasas()
-        //{
-        //    DateTime utoellDatum;
-        //    Csatlakozas();
-        //    try
-        //    {
-        //        command.CommandText = "SELECT [UtoellenorzesDatuma],[AllatID] AS [Allatnev] FROM [Orokbefogadas] LEFT JOIN [Allat] ON [Orokbefogadas].[AllatID] = [Allat].[Nev]";
-        //        using (SqlDataReader reader = command.ExecuteReader())
-        //        {
-
-        //            utoellDatum = (DateTime)reader["UtoellenorzesDatuma"];
-
-        //            //reader.Close();
-        //        }
-        //        return utoellDatum;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new ABKivetel("A lekérdezés sikertelen!", ex);
-        //    }
-        //}
-
-        public static List<string> UtoellenorzesEsedekes() 
+        public static List<string> UtoellenorzesEsedekes()
         {
             List<string> utoellEsedekes = new List<string>();
             Csatlakozas();
             try
             {
-                command.CommandText = "SELECT [UtoellenorzesDatuma],[AllatID] FROM [Orokbefogadas] LEFT JOIN [Allat] ON [Orokbefogadas].[AllatID] = [Allat].[Nev] WHERE [UtoellenorzesDatuma] < (GETDATE() +3)";
+                command.CommandText = "SELECT [UtoellenorzesDatuma],[UtoellenorzesSikeres], [AllatID] FROM [Orokbefogadas] LEFT JOIN [Allat] ON [Orokbefogadas].[AllatID] = [Allat].[Nev] WHERE [UtoellenorzesSikeres] <> 1 AND [UtoellenorzesDatuma] < (GETDATE() +3)";
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
@@ -386,8 +370,35 @@ namespace AllatmenhelyiNyilvantarto
             {
                 throw new ABKivetel("A lekérdezés sikertelen!", ex);
             }
-            finally 
-            { 
+            finally
+            {
+                KapcsolatBontas();
+            }
+        }
+
+        public static List<string> UtoellenorzesSikeres()
+        {
+            List<string> utoellSikeres = new List<string>();
+            Csatlakozas();
+            try
+            {
+                command.CommandText = "SELECT [UtoellenorzesSikeres],[AllatID] FROM [Orokbefogadas] LEFT JOIN [Allat] ON [Orokbefogadas].[AllatID] = [Allat].[Nev] WHERE [UtoellenorzesSikeres] = 1";
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        utoellSikeres.Add(reader["AllatID"].ToString());
+                    }
+                    reader.Close();
+                }
+                return utoellSikeres;
+            }
+            catch (Exception ex)
+            {
+                throw new ABKivetel("A lekérdezés sikertelen!", ex);
+            }
+            finally
+            {
                 KapcsolatBontas();
             }
         }

@@ -119,7 +119,7 @@ namespace AllatmenhelyiNyilvantarto
         {
             if (macska.Gazdas)
             {
-                //orokbefogadas = AdatbazisKezelo.OrokbefogadasFelolvasas(macska);
+                orokbefogadas = AdatbazisKezelo.OrokbefogadasFelolvasas(macska);
                 OrokbefogadasFrm frm = new OrokbefogadasFrm(orokbefogadas, macska);
                 if (frm.ShowDialog() == DialogResult.OK)
                 {

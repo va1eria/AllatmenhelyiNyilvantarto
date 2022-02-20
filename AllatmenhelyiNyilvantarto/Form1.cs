@@ -17,16 +17,17 @@ namespace AllatmenhelyiNyilvantarto
         Orokbefogado orokbefogado;
         Kutya kutya;
         Macska macska;
-        List<Kutya> kutyak = new List<Kutya>();
-        List<Macska> macskak = new List<Macska>();
+        List<Kutya> kutyak;
+        List<Macska> macskak;
         List<Allat> gazdasok;
         List<Allat> nemGazdasok;
         List<Allat> utoellenorzesreVarok = new List<Allat>();
+        List<Allat> utoellenorzesSikeres = new List<Allat>();
 
         public Form1()
         {
             InitializeComponent();
-            TesztAdatok();
+            ProbaAdatok();
             comboBox1.DataSource = kategoria;
             //if (listBox_Allatok.SelectedIndex != -1)
             //{
@@ -34,7 +35,7 @@ namespace AllatmenhelyiNyilvantarto
             //}
         }
         //adatok felvitele nelkul ki lehessen probalni a programot
-        void TesztAdatok()
+        void ProbaAdatok()
         {
             if (gondozo == null)
             {
@@ -90,9 +91,10 @@ namespace AllatmenhelyiNyilvantarto
             GazdasLista();
             listBox_Allatok.DataSource = null;
             listBox_Allatok.DataSource = nemGazdasok;
-            listBox_Allatok.SelectedItem = null;
             listBox_Gazdasok.DataSource = null;
             listBox_Gazdasok.DataSource = gazdasok;
+            Utoellenorzes();
+            listBox_Allatok.SelectedItem = null;
             listBox_Gazdasok.SelectedItem = null;
         }
 
@@ -118,9 +120,10 @@ namespace AllatmenhelyiNyilvantarto
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             listBox_Allatok.DataSource = null;
-            kutyak.Clear();
-            macskak.Clear();
-
+            //kutyak.Clear();
+            //macskak.Clear();
+            kutyak = new List<Kutya>();
+            macskak = new List<Macska>();
             foreach (Allat allat in nemGazdasok)
             {
                 if (allat is Kutya kutya && kutya.Gazdas == false)
@@ -158,7 +161,12 @@ namespace AllatmenhelyiNyilvantarto
             {
                 kijelolt = listBox_Gazdasok;
             }
-            if (kijelolt.SelectedItem is Kutya)
+            else
+            {
+                MessageBox.Show("Jelöljön ki egy állatot a módosításhoz!", "Figyelem!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                DialogResult = DialogResult.None;
+            }
+            if (kijelolt != null && kijelolt.SelectedItem is Kutya)
             {
                 KutyaFrm frm = new KutyaFrm((Kutya)kijelolt.SelectedItem);
                 if (frm.ShowDialog() == DialogResult.OK)
@@ -166,7 +174,7 @@ namespace AllatmenhelyiNyilvantarto
                     LBFrissit();
                 }
             }
-            else if (kijelolt.SelectedItem is Macska)
+            else if (kijelolt != null && kijelolt.SelectedItem is Macska)
             {
                 MacskaFrm frm = new MacskaFrm((Macska)kijelolt.SelectedItem);
                 if (frm.ShowDialog() == DialogResult.OK)
@@ -186,11 +194,12 @@ namespace AllatmenhelyiNyilvantarto
         }
 
         private void btn_OrokbefogadasAdatai_Click(object sender, EventArgs e)
-        {
-            if (listBox_Allatok.SelectedItem != null)
+        {// TODO 
+            if (listBox_Gazdasok.SelectedItem != null)
             {
-                OrokbefogadasFrm frm = new OrokbefogadasFrm((Allat)listBox_Allatok.SelectedItem);
+                OrokbefogadasFrm frm = new OrokbefogadasFrm((Allat)listBox_Gazdasok.SelectedItem);
                 frm.ShowDialog();
+
             }
         }
 
@@ -243,6 +252,9 @@ namespace AllatmenhelyiNyilvantarto
         public void Utoellenorzes()
         {
             List<string> utoellenorzesreVaroNevek = AdatbazisKezelo.UtoellenorzesEsedekes();
+            List<string> utellenorzesSikeresNevek = AdatbazisKezelo.UtoellenorzesSikeres();
+            utoellenorzesreVarok.Clear();
+            utoellenorzesSikeres.Clear();
             foreach (Allat allat in gazdasok)
             {
                 for (int i = 0; i < utoellenorzesreVaroNevek.Count; i++)
@@ -250,28 +262,23 @@ namespace AllatmenhelyiNyilvantarto
                     if (allat.Nev == utoellenorzesreVaroNevek[i])
                     {
                         utoellenorzesreVarok.Add(allat);
+                        listBox_Gazdasok.DataSource = null;
+                        listBox_Gazdasok.DataSource = gazdasok;
+                    }
+                }
+                for (int i = 0; i < utellenorzesSikeresNevek.Count; i++)
+                {
+                    if (allat.Nev == utellenorzesSikeresNevek[i])
+                    {
+                        utoellenorzesSikeres.Add(allat);
                     }
                 }
             }
-            
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             Utoellenorzes();
-            //TODO
-            //List<string> utoellenorzesreVaroNevek = AdatbazisKezelo.UtoellenorzesEsedekes();
-            //foreach (Allat allat in gazdasok)
-            //{
-            //    for (int i = 0; i < utoellenorzesreVaroNevek.Count; i++)
-            //    {
-            //        if (allat.Nev == utoellenorzesreVaroNevek[i])
-            //        {
-            //            utoellenorzesreVarok.Add(allat);
-            //        }
-            //    }
-            //}
-            
         }
 
         private void listBox_Gazdasok_DrawItem(object sender, DrawItemEventArgs e)
@@ -281,15 +288,19 @@ namespace AllatmenhelyiNyilvantarto
 
             for (int i = 0; i < listBox_Gazdasok.Items.Count; i++)
             {
-                if (utoellenorzesreVarok.Contains(listBox_Gazdasok.Items[e.Index] as Allat))
+                if (utoellenorzesreVarok.Count != 0 && utoellenorzesreVarok.Contains(listBox_Gazdasok.Items[e.Index] as Allat))
                 {
                     myBrush = Brushes.Red;
-                    e.Graphics.DrawString(listBox_Gazdasok.Items[e.Index].ToString(),e.Font, myBrush, e.Bounds, StringFormat.GenericDefault);
+                    e.Graphics.DrawString(listBox_Gazdasok.Items[e.Index].ToString(), e.Font, myBrush, e.Bounds, StringFormat.GenericDefault);
+                }
+                else if (utoellenorzesSikeres.Count != 0 && utoellenorzesSikeres.Contains(listBox_Gazdasok.Items[e.Index] as Allat))
+                {
+                    myBrush = Brushes.Green;
+                    e.Graphics.DrawString(listBox_Gazdasok.Items[e.Index].ToString(), e.Font, myBrush, e.Bounds, StringFormat.GenericDefault);
                 }
                 else
                 {
-                    e.Graphics.DrawString(listBox_Gazdasok.Items[e.Index].ToString(),e.Font, myBrush, e.Bounds, StringFormat.GenericDefault);
-
+                    e.Graphics.DrawString(listBox_Gazdasok.Items[e.Index].ToString(), e.Font, myBrush, e.Bounds, StringFormat.GenericDefault);
                 }
             }
         }
