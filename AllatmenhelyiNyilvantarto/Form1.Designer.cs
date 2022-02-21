@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -42,7 +43,6 @@
             this.listBox_Gazdasok = new System.Windows.Forms.ListBox();
             this.listBox_Allatok = new System.Windows.Forms.ListBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.btn_GondozoTorol = new System.Windows.Forms.Button();
             this.btn_GondozoModosit = new System.Windows.Forms.Button();
             this.btn_UjGondozo = new System.Windows.Forms.Button();
             this.btn_OrokbeTorol = new System.Windows.Forms.Button();
@@ -84,6 +84,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.comboBox2);
             this.tabPage1.Controls.Add(this.comboBox1);
             this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.label1);
@@ -102,6 +103,15 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "           Állatok            ";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(228, 211);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(160, 28);
+            this.comboBox2.TabIndex = 10;
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // comboBox1
             // 
@@ -190,7 +200,7 @@
             this.listBox_Gazdasok.Size = new System.Drawing.Size(366, 144);
             this.listBox_Gazdasok.TabIndex = 1;
             this.listBox_Gazdasok.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox_Gazdasok_DrawItem);
-            this.listBox_Gazdasok.SelectedIndexChanged += new System.EventHandler(this.listBox_Allatok_SelectedIndexChanged);
+            this.listBox_Gazdasok.SelectedIndexChanged += new System.EventHandler(this.listBox_Gazdasok_SelectedIndexChanged);
             // 
             // listBox_Allatok
             // 
@@ -204,7 +214,6 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.btn_GondozoTorol);
             this.tabPage2.Controls.Add(this.btn_GondozoModosit);
             this.tabPage2.Controls.Add(this.btn_UjGondozo);
             this.tabPage2.Controls.Add(this.btn_OrokbeTorol);
@@ -223,15 +232,6 @@
             this.tabPage2.Text = "            Személyek            ";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // btn_GondozoTorol
-            // 
-            this.btn_GondozoTorol.Location = new System.Drawing.Point(446, 361);
-            this.btn_GondozoTorol.Name = "btn_GondozoTorol";
-            this.btn_GondozoTorol.Size = new System.Drawing.Size(214, 33);
-            this.btn_GondozoTorol.TabIndex = 19;
-            this.btn_GondozoTorol.Text = "Gondozó törlése";
-            this.btn_GondozoTorol.UseVisualStyleBackColor = true;
-            // 
             // btn_GondozoModosit
             // 
             this.btn_GondozoModosit.Location = new System.Drawing.Point(446, 304);
@@ -240,6 +240,7 @@
             this.btn_GondozoModosit.TabIndex = 18;
             this.btn_GondozoModosit.Text = "Gondozó módosítása";
             this.btn_GondozoModosit.UseVisualStyleBackColor = true;
+            this.btn_GondozoModosit.Click += new System.EventHandler(this.btn_GondozoModosit_Click);
             // 
             // btn_UjGondozo
             // 
@@ -259,6 +260,7 @@
             this.btn_OrokbeTorol.TabIndex = 16;
             this.btn_OrokbeTorol.Text = "Örökbefogadó törlése";
             this.btn_OrokbeTorol.UseVisualStyleBackColor = true;
+            this.btn_OrokbeTorol.Click += new System.EventHandler(this.btn_OrokbeTorol_Click);
             // 
             // btn_OrokbeModosit
             // 
@@ -268,6 +270,7 @@
             this.btn_OrokbeModosit.TabIndex = 15;
             this.btn_OrokbeModosit.Text = "Örökbefogadó módosítása";
             this.btn_OrokbeModosit.UseVisualStyleBackColor = true;
+            this.btn_OrokbeModosit.Click += new System.EventHandler(this.btn_OrokbeModosit_Click);
             // 
             // btn_UjOrokbe
             // 
@@ -305,6 +308,7 @@
             this.listBox_Gondozok.Name = "listBox_Gondozok";
             this.listBox_Gondozok.Size = new System.Drawing.Size(366, 144);
             this.listBox_Gondozok.TabIndex = 11;
+            this.listBox_Gondozok.SelectedIndexChanged += new System.EventHandler(this.listBox_Gazdasok_SelectedIndexChanged);
             // 
             // listBox_Orokbefogadok
             // 
@@ -314,6 +318,7 @@
             this.listBox_Orokbefogadok.Name = "listBox_Orokbefogadok";
             this.listBox_Orokbefogadok.Size = new System.Drawing.Size(366, 144);
             this.listBox_Orokbefogadok.TabIndex = 10;
+            this.listBox_Orokbefogadok.SelectedIndexChanged += new System.EventHandler(this.listBox_Orokbefogadok_SelectedIndexChanged);
             // 
             // tabPage3
             // 
@@ -478,7 +483,6 @@
         private System.Windows.Forms.ListBox listBox_Gazdasok;
         private System.Windows.Forms.ListBox listBox_Allatok;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.Button btn_GondozoTorol;
         private System.Windows.Forms.Button btn_GondozoModosit;
         private System.Windows.Forms.Button btn_UjGondozo;
         private System.Windows.Forms.Button btn_OrokbeTorol;
@@ -499,6 +503,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ComboBox comboBox2;
     }
 }
 

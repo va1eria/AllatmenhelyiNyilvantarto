@@ -18,12 +18,27 @@ namespace AllatmenhelyiNyilvantarto
             InitializeComponent();
         }
 
+        internal GondozoFrm(Gondozo modosit) : this()
+        {
+            gondozo = modosit;
+            dateTimePicker1.Value = gondozo.SzuletesiDatum;
+            txb_nev.Text = gondozo.Nev;
+            dateTimePicker1.Enabled = false;
+        }
         private void btn_OK_Click(object sender, EventArgs e)
         {
             try
             {
-                gondozo = new Gondozo(txb_nev.Text, dateTimePicker1.Value);
-                AdatbazisKezelo.GondozoFelvitel(gondozo);
+                if (gondozo == null)
+                {
+                    gondozo = new Gondozo(txb_nev.Text, dateTimePicker1.Value);
+                    AdatbazisKezelo.GondozoFelvitel(gondozo); 
+                }
+                else
+                {
+                    gondozo.Nev = txb_nev.Text;
+                    AdatbazisKezelo.GondozoModositas(gondozo);
+                }
             }
             catch (ABKivetel ex)
             {

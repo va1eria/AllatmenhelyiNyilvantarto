@@ -13,12 +13,13 @@ namespace AllatmenhelyiNyilvantarto
     public partial class Form1 : Form
     {
         readonly string[] kategoria = new string[3] { "Összes", "Kutya", "Macska" };
+        readonly string[] kategoria1 = new string[3] { "Összes", "Kutya", "Macska" };
         Gondozo gondozo;
         Orokbefogado orokbefogado;
         Kutya kutya;
         Macska macska;
-        List<Kutya> kutyak;
-        List<Macska> macskak;
+        List<Kutya> nemGazdasKutyak;
+        List<Macska> nemGazdasMacskak;
         List<Allat> gazdasok;
         List<Allat> nemGazdasok;
         List<Kutya> gazdasKutyak;
@@ -31,10 +32,7 @@ namespace AllatmenhelyiNyilvantarto
             InitializeComponent();
             ProbaAdatok();
             comboBox1.DataSource = kategoria;
-            //if (listBox_Allatok.SelectedIndex != -1)
-            //{
-            //    listBox_Gazdasok.Enabled = false;
-            //}
+            comboBox2.DataSource = kategoria1;
         }
         //adatok felvitele nelkul ki lehessen probalni a programot
         void ProbaAdatok()
@@ -47,7 +45,7 @@ namespace AllatmenhelyiNyilvantarto
             if (orokbefogado == null)
             {
                 orokbefogado = new Orokbefogado("Matr Ica", "Budapest, Fő utca 1.", "ica@email.com", new DateTime(1984, 07, 02));
-                AdatbazisKezelo.OrokbefogadoFelvitele(orokbefogado);
+                AdatbazisKezelo.OrokbefogadoFelvitel(orokbefogado);
             }
             if (kutya == null)
             {
@@ -86,7 +84,7 @@ namespace AllatmenhelyiNyilvantarto
 
         void LBFrissit()
         {
-            
+
             listBox_Gondozok.DataSource = null;
             listBox_Gondozok.DataSource = AdatbazisKezelo.GondozokFelolvasas();
             listBox_Orokbefogadok.DataSource = null;
@@ -101,49 +99,32 @@ namespace AllatmenhelyiNyilvantarto
             Utoellenorzes();
             listBox_Allatok.SelectedItem = null;
             listBox_Gazdasok.SelectedItem = null;
-            richTextBox_Kutyak.Text = kutyak.Count.ToString();
+            listBox_Gondozok.SelectedItem = null;
+            listBox_Orokbefogadok.SelectedItem = null;
+            richTextBox_Kutyak.Text = nemGazdasKutyak.Count.ToString();
             richTextBox_Kutyak.SelectionAlignment = HorizontalAlignment.Center;
-            richTextBox_Macskak.Text = macskak.Count.ToString();
+            richTextBox_Macskak.Text = nemGazdasMacskak.Count.ToString();
             richTextBox_Macskak.SelectionAlignment = HorizontalAlignment.Center;
             richTextBox_GazdasKutyak.Text = gazdasKutyak.Count.ToString();
             richTextBox_GazdasKutyak.SelectionAlignment = HorizontalAlignment.Center;
-            richTextBox_GazdasMacskak.Text= gazdasMacskak.Count.ToString();
+            richTextBox_GazdasMacskak.Text = gazdasMacskak.Count.ToString();
             richTextBox_GazdasMacskak.SelectionAlignment = HorizontalAlignment.Center;
-        }
-
-        private void btn_UjAllat_Click(object sender, EventArgs e)
-        {
-            AllatFrm frm = new AllatFrm();
-            if (frm.ShowDialog() == DialogResult.OK)
-            {
-                comboBox1_SelectedIndexChanged(sender, e);
-                LBFrissit();
-            }
-        }
-
-        private void btn_UjGondozo_Click(object sender, EventArgs e)
-        {
-            GondozoFrm frm = new GondozoFrm();
-            if (frm.ShowDialog() == DialogResult.OK)
-            {
-                LBFrissit();
-            }
         }
 
         void NemGazdasKutyakMacskak()
         {
             listBox_Allatok.DataSource = null;
-            kutyak = new List<Kutya>();
-            macskak = new List<Macska>();
+            nemGazdasKutyak = new List<Kutya>();
+            nemGazdasMacskak = new List<Macska>();
             foreach (Allat allat in nemGazdasok)
             {
                 if (allat is Kutya kutya && kutya.Gazdas == false)
                 {
-                    kutyak.Add(kutya);
+                    nemGazdasKutyak.Add(kutya);
                 }
                 else if (allat is Macska macska && macska.Gazdas == false)
                 {
-                    macskak.Add(macska);
+                    nemGazdasMacskak.Add(macska);
                 }
             }
         }
@@ -165,6 +146,33 @@ namespace AllatmenhelyiNyilvantarto
             }
         }
 
+        void Utoellenorzes()
+        {
+            List<string> utoellenorzesreVaroNevek = AdatbazisKezelo.UtoellenorzesEsedekes();
+            List<string> utellenorzesSikeresNevek = AdatbazisKezelo.UtoellenorzesSikeres();
+            utoellenorzesreVarok.Clear();
+            utoellenorzesSikeres.Clear();
+            foreach (Allat allat in gazdasok)
+            {
+                for (int i = 0; i < utoellenorzesreVaroNevek.Count; i++)
+                {
+                    if (allat.Nev == utoellenorzesreVaroNevek[i])
+                    {
+                        utoellenorzesreVarok.Add(allat);
+                        listBox_Gazdasok.DataSource = null;
+                        listBox_Gazdasok.DataSource = gazdasok;
+                    }
+                }
+                for (int i = 0; i < utellenorzesSikeresNevek.Count; i++)
+                {
+                    if (allat.Nev == utellenorzesSikeresNevek[i])
+                    {
+                        utoellenorzesSikeres.Add(allat);
+                    }
+                }
+            }
+        }
+
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             NemGazdasKutyakMacskak();
@@ -174,11 +182,38 @@ namespace AllatmenhelyiNyilvantarto
                     listBox_Allatok.DataSource = nemGazdasok;
                     break;
                 case "Kutya":
-                    listBox_Allatok.DataSource = kutyak;
+                    listBox_Allatok.DataSource = nemGazdasKutyak;
                     break;
                 case "Macska":
-                    listBox_Allatok.DataSource = macskak;
+                    listBox_Allatok.DataSource = nemGazdasMacskak;
                     break;
+            }
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GazdasKutyakMacskak();
+            switch (comboBox2.SelectedItem.ToString())
+            {
+                case "Összes":
+                    listBox_Gazdasok.DataSource = gazdasok;
+                    break;
+                case "Kutya":
+                    listBox_Gazdasok.DataSource = gazdasKutyak;
+                    break;
+                case "Macska":
+                    listBox_Gazdasok.DataSource = gazdasMacskak;
+                    break;
+            }
+        }
+
+        private void btn_UjAllat_Click(object sender, EventArgs e)
+        {
+            AllatFrm frm = new AllatFrm();
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                comboBox1_SelectedIndexChanged(sender, e);
+                LBFrissit();
             }
         }
 
@@ -216,47 +251,6 @@ namespace AllatmenhelyiNyilvantarto
             }
         }
 
-        private void btn_Kilepes_Click(object sender, EventArgs e)
-        {
-
-            if (MessageBox.Show("Biztosan kilép a programból?", "Figyelem!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-            {
-                Application.Exit();
-            }
-        }
-
-        private void btn_OrokbefogadasAdatai_Click(object sender, EventArgs e)
-        {
-            if (listBox_Gazdasok.SelectedItem != null)
-            {
-                OrokbefogadasAdataiFrm frm = new OrokbefogadasAdataiFrm((Allat)listBox_Gazdasok.SelectedItem);
-                frm.ShowDialog();
-            }
-        }
-
-        private void btn_UjOrokbe_Click(object sender, EventArgs e)
-        {
-            OrokbefogadoFrm frm = new OrokbefogadoFrm();
-            if (frm.ShowDialog() == DialogResult.OK)
-            {
-                LBFrissit();
-            }
-        }
-
-        private void listBox_Allatok_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if ((sender as ListBox).SelectedIndex != -1)
-            {
-                foreach (Control item in Controls)
-                {
-                    if (item is ListBox lbx && lbx != (ListBox)sender)
-                    {
-                        lbx.SelectedIndex = -1;
-                    }
-                }
-            }
-        }
-
         private void btn_AllatTorles_Click(object sender, EventArgs e)
         {
             ListBox kijelolt = null;
@@ -280,36 +274,48 @@ namespace AllatmenhelyiNyilvantarto
             }
         }
 
-        public void Utoellenorzes()
+        private void btn_OrokbefogadasAdatai_Click(object sender, EventArgs e)
         {
-            List<string> utoellenorzesreVaroNevek = AdatbazisKezelo.UtoellenorzesEsedekes();
-            List<string> utellenorzesSikeresNevek = AdatbazisKezelo.UtoellenorzesSikeres();
-            utoellenorzesreVarok.Clear();
-            utoellenorzesSikeres.Clear();
-            foreach (Allat allat in gazdasok)
+            if (listBox_Gazdasok.SelectedItem != null)
             {
-                for (int i = 0; i < utoellenorzesreVaroNevek.Count; i++)
-                {
-                    if (allat.Nev == utoellenorzesreVaroNevek[i])
-                    {
-                        utoellenorzesreVarok.Add(allat);
-                        listBox_Gazdasok.DataSource = null;
-                        listBox_Gazdasok.DataSource = gazdasok;
-                    }
-                }
-                for (int i = 0; i < utellenorzesSikeresNevek.Count; i++)
-                {
-                    if (allat.Nev == utellenorzesSikeresNevek[i])
-                    {
-                        utoellenorzesSikeres.Add(allat);
-                    }
-                }
+                OrokbefogadasAdataiFrm frm = new OrokbefogadasAdataiFrm((Allat)listBox_Gazdasok.SelectedItem);
+                frm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Jelöljön ki egy gazdás állatot!", "Hiba!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DialogResult = DialogResult.None;
             }
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void btn_Kilepes_Click(object sender, EventArgs e)
         {
-            Utoellenorzes();
+
+            if (MessageBox.Show("Biztosan kilép a programból?", "Figyelem!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+        }
+
+        private void listBox_Allatok_SelectedIndexChanged(object sender, EventArgs e)
+        {//TODO ???
+            listBox_Gazdasok.SelectedItem = null;
+            //if ((sender as ListBox).SelectedIndex != -1)
+            //{
+            //    foreach (Control item in Controls)
+            //    {
+            //        if (item is ListBox lbx && lbx != (ListBox)sender)
+            //        {
+            //            lbx.SelectedIndex = -1;
+            //        }
+            //    }
+            //}
+
+        }
+
+        private void listBox_Gazdasok_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            listBox_Allatok.SelectedItem = null;
         }
 
         private void listBox_Gazdasok_DrawItem(object sender, DrawItemEventArgs e)
@@ -335,5 +341,91 @@ namespace AllatmenhelyiNyilvantarto
                 }
             }
         }
+
+        private void btn_UjOrokbe_Click(object sender, EventArgs e)
+        {
+            OrokbefogadoFrm frm = new OrokbefogadoFrm();
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                LBFrissit();
+            }
+        }
+
+        private void btn_OrokbeModosit_Click(object sender, EventArgs e)
+        {
+            if (listBox_Orokbefogadok.SelectedItem != null)
+            {
+                OrokbefogadoFrm frm = new OrokbefogadoFrm((Orokbefogado)listBox_Orokbefogadok.SelectedItem);
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    LBFrissit();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Jelöljön ki egy örökbefogadót a módosításhoz!", "Figyelem!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                DialogResult = DialogResult.None;
+            }
+        }
+
+        private void btn_OrokbeTorol_Click(object sender, EventArgs e)
+        {
+            if (listBox_Orokbefogadok.SelectedItem != null && MessageBox.Show("Biztosan törli a kijelölt örökbefogadót?", "Biztosan?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                AdatbazisKezelo.OrokbefogadoTorles((Orokbefogado)listBox_Orokbefogadok.SelectedItem);
+                LBFrissit();
+            }
+            else
+            {
+                MessageBox.Show("A törléshez jelöljön ki egy örökbefogadót!", "Hiba!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DialogResult = DialogResult.None;
+            }
+        }
+
+        private void btn_UjGondozo_Click(object sender, EventArgs e)
+        {
+            GondozoFrm frm = new GondozoFrm();
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                LBFrissit();
+            }
+        }
+
+        private void btn_GondozoModosit_Click(object sender, EventArgs e)
+        {
+            if (listBox_Gondozok.SelectedItem != null)
+            {
+                GondozoFrm frm = new GondozoFrm((Gondozo)listBox_Gondozok.SelectedItem);
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    LBFrissit();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Jelöljön ki egy gondozót a módosításhoz!", "Figyelem!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                DialogResult = DialogResult.None;
+            }
+        }
+
+        private void listBox_Orokbefogadok_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if ((sender as ListBox).SelectedIndex != -1)
+            {
+                foreach (Control item in Controls)
+                {
+                    if (item is ListBox lbx && lbx != (ListBox)sender)
+                    {
+                        lbx.SelectedIndex = -1;
+                    }
+                }
+            }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            Utoellenorzes();
+        }
+
     }
 }

@@ -18,7 +18,7 @@ namespace AllatmenhelyiNyilvantarto
             Orokbefogadas orokbefogadas = AdatbazisKezelo.OrokbefogadasFelolvasas(allat);
             textBox_Allat.Text = allat.Nev;
             textBox_OrokbefDatum.Text = orokbefogadas.OrokbefogadasDatuma.ToShortDateString();
-            //textBox_Orokbefogado.Text = 
+            textBox_Orokbefogado.Text = AdatbazisKezelo.OrokbefogadoKiolvasas(allat).Nev;
             textBox_Utoellenorzes.Text = orokbefogadas.UtoellenorzesDatuma.ToShortDateString();
             if (orokbefogadas.SikeresUtoellenorzes)
             {

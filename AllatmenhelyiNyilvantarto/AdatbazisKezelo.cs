@@ -215,7 +215,28 @@ namespace AllatmenhelyiNyilvantarto
             }
         }
 
-        public static void OrokbefogadoFelvitele(Orokbefogado uj)
+        public static void GondozoModositas(Gondozo modosit)
+        {
+            Csatlakozas();
+            try
+            {
+                command.CommandText = "UPDATE [Gondozo] SET [Nev] = @nev WHERE [Id] = @id";
+                command.Parameters.AddWithValue("@nev", modosit.Nev);
+                command.Parameters.AddWithValue("@id", modosit.Id);
+
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new ABKivetel("A gondozó módosítása sikertelen!", ex);
+            }
+            finally
+            {
+                KapcsolatBontas();
+            }
+        }
+
+        public static void OrokbefogadoFelvitel(Orokbefogado uj)
         {
             Csatlakozas();
             try
@@ -250,7 +271,63 @@ namespace AllatmenhelyiNyilvantarto
             }
         }
 
-        public static void OrokbefogadasFelvitele(Orokbefogado orokbefogado, Allat allat, Orokbefogadas uj)
+        public static void OrokbefogadoModositas(Orokbefogado modosit)
+        {
+            Csatlakozas();
+            try
+            {
+                command.CommandText = "UPDATE [Orokbefogado] SET [Nev] = @nev, [Lakcim] = @cim, [Email] = @email WHERE [Id] = @id";
+                command.Parameters.AddWithValue("@nev", modosit.Nev);
+                command.Parameters.AddWithValue("@cim", modosit.Lakcim);
+                command.Parameters.AddWithValue("@email", modosit.Email);
+                command.Parameters.AddWithValue("@id", modosit.Id);
+
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new ABKivetel("Az örökbefogadó módosítása sikertelen!", ex);
+            }
+            finally
+            {
+                KapcsolatBontas();
+            }
+        }
+
+        public static void OrokbefogadoTorles(Orokbefogado torol)
+        {
+            Csatlakozas();
+            try
+            {
+                command.Transaction = connection.BeginTransaction();
+                command.CommandText = "DELETE FROM [Orokbefogado] WHERE [Id] = @id";
+                command.Parameters.AddWithValue("@id", torol.Id);
+                command.ExecuteNonQuery();
+                command.Transaction.Commit();
+            }
+            catch (Exception ex)
+            {
+                try
+                {
+                    if (command.Transaction != null)
+                    {
+                        command.Transaction.Rollback();
+                    }
+
+                }
+                catch (Exception ex2)
+                {
+                    throw new ABKivetel("Végzetes hiba az adatbázisban! Értesítse a rendszergazdát!", ex2);
+                }
+                throw new ABKivetel("Az örökbefogadó törlése sikertelen!", ex);
+            }
+            finally
+            {
+                KapcsolatBontas();
+            }
+        }
+
+        public static void OrokbefogadasFelvitel(Orokbefogado orokbefogado, Allat allat, Orokbefogadas uj)
         {
             Csatlakozas();
             try
@@ -317,6 +394,7 @@ namespace AllatmenhelyiNyilvantarto
                 KapcsolatBontas();
             }
         }
+
         public static Orokbefogadas OrokbefogadasFelolvasas(Allat allat)
         {
             Orokbefogadas orokbefogadas = null;
@@ -341,6 +419,50 @@ namespace AllatmenhelyiNyilvantarto
             catch (Exception ex)
             {
                 throw new ABKivetel("A lekérdezés sikertelen!", ex);
+            }
+        }
+
+        public static Orokbefogado OrokbefogadoKiolvasas(Allat allat)
+        {
+            int id = -1;
+            Orokbefogado orokbefogado = null;
+            Csatlakozas();
+            try
+            {
+                command.CommandText = "SELECT [OrokbefogadoID], [AllatID] AS [Allatnev] FROM [Orokbefogadas] LEFT JOIN [Allat] ON [Orokbefogadas].[AllatID] = @nev";
+                command.Parameters.AddWithValue("@nev", allat.Nev);
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        if (!reader.IsDBNull(reader.GetOrdinal("Allatnev")))
+                        {
+                            id = (int)reader["OrokbefogadoID"];
+                        }
+                    }
+                    reader.Close();
+                }
+                command.Parameters.Clear();
+                command.CommandText = "SELECT * FROM [Orokbefogado] WHERE [Id] = @id";
+                command.Parameters.AddWithValue("@id", id);
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        if (id != -1)
+                        {
+                            orokbefogado = new Orokbefogado(reader["Nev"].ToString(), reader["Lakcim"].ToString(), reader["Email"].ToString(), (DateTime)reader["SzuletesiDatum"]);
+                        }
+                    }
+                    reader.Close ();
+                }
+                return orokbefogado;
+            }
+            catch (Exception ex)
+            {
+                throw new ABKivetel("A kiolvasás sikertelen!", ex);
             }
         }
 

@@ -45,7 +45,7 @@ namespace AllatmenhelyiNyilvantarto
         public DateTime SzuletesiDatum
         {
             get => szuletesiDatum;
-            set
+            private set
             {
                 if (value.Year < (DateTime.Now.Year - 18))
                 {

@@ -22,7 +22,6 @@ namespace AllatmenhelyiNyilvantarto
             comboBox_Nem.DataSource = Enum.GetValues(typeof(Nem));
             comboBox_Szor.DataSource = Enum.GetValues(typeof(Szor));
             comboBox_Gondozo.DataSource = AdatbazisKezelo.GondozokFelolvasas();
-            //checkBox_orokbefogadva.Enabled = false;
         }
 
         internal KutyaFrm(Kutya modosit) : this()

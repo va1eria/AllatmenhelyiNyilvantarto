@@ -22,7 +22,6 @@ namespace AllatmenhelyiNyilvantarto
             comboBox_Nem.DataSource = Enum.GetValues(typeof(Nem));
             comboBox_Szor.DataSource = Enum.GetValues(typeof(Szor));
             comboBox_Gondozo.DataSource = AdatbazisKezelo.GondozokFelolvasas();
-            //checkBox_orokbefogadva.Enabled = false;
         }
 
         internal MacskaFrm(Macska modosit) : this()
@@ -119,7 +118,6 @@ namespace AllatmenhelyiNyilvantarto
                 label_Orokbefogadonal.Visible = true;
             }
         }
-        //TODO orokbefogadas modositas
         private void btn_OrokbefModosit_Click(object sender, EventArgs e)
         {
             if (macska.Gazdas)

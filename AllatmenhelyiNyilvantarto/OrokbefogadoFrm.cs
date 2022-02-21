@@ -19,12 +19,32 @@ namespace AllatmenhelyiNyilvantarto
             InitializeComponent();
         }
 
+        internal OrokbefogadoFrm(Orokbefogado modosit) :this()
+        {
+            orokbefogado = modosit;
+            txb_nev.Text = orokbefogado.Nev;
+            txb_lakcim.Text = orokbefogado.Lakcim;
+            txb_email.Text = orokbefogado.Email;
+            dateTimePicker1.Value = orokbefogado.SzuletesiDatum;
+            dateTimePicker1.Enabled = false;
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             try
             {
-                orokbefogado = new Orokbefogado(txb_nev.Text, txb_lakcim.Text, txb_email.Text, dateTimePicker1.Value);
-                AdatbazisKezelo.OrokbefogadoFelvitele(orokbefogado);
+                if (orokbefogado == null)
+                {
+                    orokbefogado = new Orokbefogado(txb_nev.Text, txb_lakcim.Text, txb_email.Text, dateTimePicker1.Value);
+                    AdatbazisKezelo.OrokbefogadoFelvitel(orokbefogado); 
+                }
+                else
+                {
+                    orokbefogado.Nev = txb_nev.Text;
+                    orokbefogado.Lakcim = txb_lakcim.Text;
+                    orokbefogado.Email = txb_email.Text;
+                    AdatbazisKezelo.OrokbefogadoModositas(orokbefogado);
+                }
             }
             catch (ABKivetel ex)
             {

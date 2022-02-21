@@ -13,7 +13,6 @@ namespace AllatmenhelyiNyilvantarto
     public partial class OrokbefogadasFrm : Form
     {
         Allat allat;
-        //Orokbefogado orokbefogado;
         Orokbefogadas orokbefogadas;
 
         internal OrokbefogadasFrm(Allat allat)
@@ -32,10 +31,8 @@ namespace AllatmenhelyiNyilvantarto
             dateTimePicker_Orokbefogadas.Value = DateTime.Now;
             dateTimePicker_Utoell.Value = dateTimePicker_Orokbefogadas.Value.AddMonths(1);
             dateTimePicker_Utoell.Enabled = false;
-            //comboBox_Allat.DataSource = AdatbazisKezelo.AllatokFelolvasas();
             comboBox_Orokbefogado.DataSource = AdatbazisKezelo.OrokbefogadokFelolvasas();
         }
-        // TODO orokbefogadas modositas
         internal OrokbefogadasFrm(Orokbefogadas modosit, Allat allat) : this(allat)
         {
             orokbefogadas = modosit;
@@ -56,11 +53,10 @@ namespace AllatmenhelyiNyilvantarto
                 if (orokbefogadas == null)
                 {
                     orokbefogadas = new Orokbefogadas(dateTimePicker_Orokbefogadas.Value, dateTimePicker_Utoell.Value, checkBox_Utoell.Checked);
-                    AdatbazisKezelo.OrokbefogadasFelvitele((Orokbefogado)comboBox_Orokbefogado.SelectedItem, allat, orokbefogadas); 
+                    AdatbazisKezelo.OrokbefogadasFelvitel((Orokbefogado)comboBox_Orokbefogado.SelectedItem, allat, orokbefogadas); 
                 }
                 else
-                {//TODO orokbefogadas modosit
-                    //orokbefogadas.OrokbefogadasDatuma = dateTimePicker_Orokbefogadas.Value;
+                {
                     if (dateTimePicker_Utoell.Value > dateTimePicker_Orokbefogadas.Value.AddDays(7))
                     {
                         orokbefogadas.UtoellenorzesDatuma = dateTimePicker_Utoell.Value; 
