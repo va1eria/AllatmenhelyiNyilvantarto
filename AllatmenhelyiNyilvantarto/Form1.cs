@@ -230,7 +230,7 @@ namespace AllatmenhelyiNyilvantarto
             }
             else
             {
-                MessageBox.Show("Jelöljön ki egy állatot a módosításhoz!", "Figyelem!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Jelöljön ki egy állatot a módosításhoz!", "Hiba!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 DialogResult = DialogResult.None;
             }
             if (kijelolt != null && kijelolt.SelectedItem is Kutya)
@@ -269,7 +269,7 @@ namespace AllatmenhelyiNyilvantarto
             }
             else
             {
-                MessageBox.Show("A törléshez jelöljön ki egy állatot!", "Hiba!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Jelöljön ki egy állatot a törléshez!", "Hiba!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 DialogResult = DialogResult.None;
             }
         }
@@ -363,7 +363,7 @@ namespace AllatmenhelyiNyilvantarto
             }
             else
             {
-                MessageBox.Show("Jelöljön ki egy örökbefogadót a módosításhoz!", "Figyelem!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Jelöljön ki egy örökbefogadót a módosításhoz!", "Hiba!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 DialogResult = DialogResult.None;
             }
         }
@@ -403,7 +403,7 @@ namespace AllatmenhelyiNyilvantarto
             }
             else
             {
-                MessageBox.Show("Jelöljön ki egy gondozót a módosításhoz!", "Figyelem!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Jelöljön ki egy gondozót a módosításhoz!", "Hiba!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 DialogResult = DialogResult.None;
             }
         }

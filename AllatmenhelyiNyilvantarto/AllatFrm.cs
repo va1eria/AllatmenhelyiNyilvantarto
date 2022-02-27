@@ -28,5 +28,6 @@ namespace AllatmenhelyiNyilvantarto
             MacskaFrm frm = new MacskaFrm();
             frm.ShowDialog();
         }
+
     }
 }
